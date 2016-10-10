@@ -1,0 +1,330 @@
+#body {
+	font-size: 30px;
+}
+#body .img1{
+	background-image: url("../image/achievement-image/road_sunset_marking_grass_102104_3840x2160.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 650px;
+	position: relative;
+}
+#body .img1 .image-info{
+	width: 40%;
+}
+#body .img1 .image-info img{
+	display: block;
+	position: absolute;
+	left: 40%;
+	bottom: 26%;
+}
+#body .img1 .text{
+	width: 74%;
+	position: absolute;
+	left: 13%;
+	right: 13%;
+	bottom: 5%;
+	
+}
+#body .img1 .text p{
+	color: white;
+	font-size: 0.6em;
+	text-align: center;
+	line-height: 1.5em;
+	font-weight: lighter;
+}
+#body .img1 .text .title{
+	font-size: 0.8em;
+}
+/*新星杯*/
+#body .img2{
+	background-image: url("../image/achievement-image/xinxingbei.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 700px;
+	position: relative;
+}
+#body .img2 .image-info{
+	width: 45%;
+	position: absolute;
+	top: 5%;
+	right: 5%;
+}
+#body .img2 .image-info .title{
+	font-size: 1.5em;
+	color: #1889D9;
+	margin-bottom: 5%;
+}
+#body .img2 .image-info .text{
+	text-align: justify;
+	width: 91%;
+	font-size: 0.8em;
+	color: #1889D9;
+	font-weight: lighter;
+}
+#body .img3{
+	background-image: url("../image/achievement-image/xinxingbei2.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 700px;
+	position: relative;
+}
+#body .img4{
+	background-image: url("../image/achievement-image/lab.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 700px;
+	position: relative;
+}
+#body .img5{
+	background-image: url("../image/achievement-image/shiyan.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 700px;
+	position: relative;
+}
+/*理奥杯曲江展*/
+#body .img6{
+	background-image: url("../image/achievement-image/qujiangzhan.JPG");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 700px;
+	position: relative;
+}
+#body .img6 .image-info{
+	width: 100%;
+	height: 33%;
+	position: relative;
+}
+#body .img6 .title{
+	width: 30%;
+	height: 100%;
+	background-color: rgba(55,88,216,0.8);
+	position: relative;
+}
+#body .img6 .title .title-info{
+	color: white;
+	font-size: 1.5em;
+	text-align: center;
+	width: 70%;
+	text-align: center;
+	position: absolute;
+	left: 15%;
+	right: 15%;
+	top: 22%;
+}
+#body .img6 .text{
+	width: 70%;
+	height: 100%;
+	background-color: rgba(24,137,217,0.8);
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+#body .img6 .text .text-info{
+	color: white;
+	font-size: 0.8em;
+	font-weight: lighter;
+	width: 80%;
+	height: 80%;
+	text-align: justify;
+	position: absolute;
+	left: 10%;
+	right: 10%;
+	top: 10%;
+}
+/*曲江作品展*/
+#body .img7{
+	background-image: url("../image/achievement-image/rob.JPG");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 700px;
+	position: relative;
+}
+#body .img7 .image-info{
+	width: 38%;
+	height: 40%;
+	background-color: rgba(24,137,217,0.8);
+	position: absolute;
+	top: 10%;
+	right: 0;
+}
+#body .img7 .title{
+	margin: 3% 5% 5% 0;
+	width: auto;
+}
+#body .img7 .title .title-info{
+	color: white;
+	font-size: 1.5em;
+}
+#body .img7 .text{
+	margin: 5% 5% 5% 5%;
+	width: 92%;
+}
+#body .img7 .text .text-info{
+	color: white;
+	font-size: 0.8em;
+	text-align: justify;
+	font-weight: lighter;
+}
+/*认真看作品介绍的学妹*/
+#body .img8{
+	background-image: url("../image/achievement-image/girl-look.JPG");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 700px;
+	position: relative;
+}
+/*理奥杯金花展*/
+/*欢迎兄弟院校前来参观*/
+#body .img9{
+	background-image: url("../image/achievement-image/jinghuazhan.JPG");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 700px;
+	position: relative;
+}
+#body .img9 .image-info{
+	width: 100%;
+	height: 38%;
+	background-color: rgba(10,188,99,0.9);
+	position: relative;
+}
+#body .img9 .title{
+	width: 45%;
+	text-align: center;
+	position: absolute;
+	left: 27.5%;
+	top: 5%;
+}
+#body .img9 .title .title-info{
+	color: white;
+	font-size: 1.5em;
+}
+#body .img9 .text{
+	width: 60%;
+	text-align: center;
+	position: absolute;
+	left: 20%;
+	bottom: 8%;
+}
+#body .img9 .text .text-info{
+	color: white;
+	font-size: 0.8em;
+	font-weight: lighter;	
+}
+/*理奥杯答辩*/
+#body .img10{
+	background-image: url("../image/achievement-image/dabian.JPG");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 700px;
+	position: relative;
+}
+/*科技小组开班仪式*/
+#body .img11{
+	background-image: url("../image/achievement-image/kaiban.JPG");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 700px;
+	position: relative;
+}
+#body .img11 .image-info{
+	width: 100%;
+	height: 35%;
+	position: relative;
+}
+#body .img11 .title{
+	width: 20%;
+	height: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+	background-color: #C81010;
+}
+#body .img11 .title .title-info{
+	color: white;
+	font-size: 1.5em;
+	width: 80%;
+	text-align: center;
+	position: absolute;
+	top: 25%;
+	left: 10%;
+}
+#body .img11 .text{
+	width: 80%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-color: #0ABC63;
+}
+#body .img11 .text .text-info{
+
+	color: white;
+	font-size: 0.8em;
+	width: 80%;
+	font-weight: lighter;
+	text-align: justify;
+	position: absolute;
+	left: 10%;
+	top: 17%;
+}
+/*赛事荣誉*/
+#body .img12{
+	background-image: url("../image/achievement-image/jiangzhuang.JPG");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 700px;
+	position: relative;
+}
+
+/*科协优秀干事表彰*/
+#body .img13{
+	background-image: url("../image/achievement-image/biaozhang.JPG");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 700px;
+	position: relative;
+}
+#body .img13 .image-info{
+	width: 100%;
+	height: 42%;
+	background-color: rgb(200,16,16);
+	position: relative;
+}
+#body .img13 .title{
+	width: 30%;
+	position: absolute;
+	top: 5%;
+	left: 35%;
+}
+#body .img13 .title .title-info{
+	color: white;
+	font-size: 1.5em;
+	text-align: center;
+}
+#body .img13 .text{
+	width: 60%;
+	position: absolute;
+	left: 20%;
+	bottom: 8%;
+}
+#body .img13 .text .text-info{
+	color: white;
+	font-size: 0.8em;
+	text-align: center;
+	font-weight: lighter;
+}

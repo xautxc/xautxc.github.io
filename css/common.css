@@ -1,0 +1,40 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-family: "Microsoft Yahei";
+	letter-spacing: 3px;
+}
+body{
+	background-color: rgb(240,240,240);
+}
+
+#body{
+	width: 100%;
+}
+.navbar {
+    margin-bottom: 0;
+}
+
+footer {
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #FFF;
+    text-align: center;
+    line-height: 30px;
+}
+/*回到顶部*/
+#totop {
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  cursor: pointer;
+}
+@media only screen and (max-width: 1024px) {
+  #totop {
+    display: none !important;
+  }
+}
+
+#header .header-nav .header-menu a:hover{
+	color: #1889D9;
+}

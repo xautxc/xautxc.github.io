@@ -1,0 +1,68 @@
+
+/*顶部显示图片*/
+/**/
+#body .img1{
+	background-image: url("../image/contact/stock-photo-128696609.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 650px;
+	position: relative;
+}
+
+/*联系我们*/
+#body .img1 .image-info{
+	width: 100%;
+}
+#body .img1 .image-info img{
+	display: block;
+	position: absolute;
+	left: 36.5%;
+	bottom: 25%;
+}
+#body .img1 .image-info .contact{
+	color: white;
+	font-size: 0.5em;
+	font-weight: lighter;
+	width: auto;
+	position: absolute;
+	left: 33%;
+	bottom: 15%;
+}
+#body .img1 .image-info p a{
+	color: white;
+	font-size: 0.5em;
+	text-decoration: none;
+	position: absolute;
+	left: 45%;
+	bottom: 10%;
+}
+#body .img1 .image-info p a:hover{
+	color: #1889D9;
+}
+/*QQ和微信 小图标*/
+#body .img1 .icon{
+	width: auto;
+	height: auto;
+	position: absolute;
+	left: 44.7%;
+	bottom: 23%;
+}
+/*QQ和微信二维码*/
+#body .img1 .qqcode{
+	width: auto;
+	height: auto;
+	position: absolute;
+	left: 27%;
+	bottom: 0;
+}
+#body .img1 .code img{
+	display: block;
+}
+#body .img1 .wechatcode{
+	width: auto;
+	height: auto;
+	position: absolute;
+	right: 29%;
+	bottom: 0;
+}

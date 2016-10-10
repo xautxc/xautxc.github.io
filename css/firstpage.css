@@ -1,0 +1,188 @@
+/*
+    reset
+ */
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+	font-family: "Microsoft Yahei";
+}
+
+.navbar {
+    margin-bottom: 0;
+    letter-spacing: 3px;    
+}
+
+#myCarousel {
+    height: 400px;
+}
+
+.carousel-inner .item {
+    background: no-repeat center center;
+    background-size: cover;
+    height: 400px;
+}
+
+.carousel-inner .item:nth-of-type(1) {
+    background-image: url('../image/home-image/moni.jpg');
+}
+.carousel-inner .item:nth-of-type(2) {
+    background-image: url('../image/home-image/tedian.jpg');
+}
+.carousel-inner .item:nth-of-type(3) {
+    background-image: url('../image/home-image/hands.jpg');
+}
+
+.carousel-inner .item h1 {
+    margin: 0;
+    color: #FFF;
+    text-align: center;
+    line-height: 400px;
+    font-weight: bolder;
+    text-shadow: #000 0 1px 0;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.news {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 300px;
+    /*background-color: rgb(248,248,248);*/
+}
+
+.news .slogan {
+    height: 300px;
+    font-size: 25px;
+    line-height: 60px;
+    color: #555;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 40px rgb(25, 185, 231);, 0 0 70px rgb(25, 185, 231);
+    text-align: center;
+    padding: 10px;
+}
+.news .sloganimg {
+    height: 300px;
+    background: url('../image/home-image/slogan.jpg') no-repeat 20% center;
+    background-size: cover;
+}
+.news a {
+    color: #555;
+}
+.news1 h2>a {
+    float: right;
+    font-size: 0.5em;
+}
+.news h2 {
+    text-align: center;
+    color: rgb(229, 0, 18);
+    border-bottom: 2px dashed #CCC;
+}
+.news .news1{
+    height: 300px;
+    overflow: hidden;
+    color: #555;
+    font-size: 20px;
+}
+.news .news1 li{
+    text-align: left;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 43px;
+}
+.news .news1 span {
+    color: rgb(128, 128, 128);
+    font-size: 18px;
+    margin-right: 50px;
+}
+
+.platform {
+    height: 480px;
+    text-align: center;
+    background-color: rgb(248,248,248);
+}
+.message {
+    height: 480px;
+    padding-top: 20px;
+    color: #555;
+}
+.message h1 {
+    text-shadow: #CCC 0 1px 0;
+}
+.message p {
+    font-size: 1.4em;
+    text-shadow: #CCC 0 1px 0;
+}
+.message button {
+    margin-top: 50px;
+}
+
+footer {
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.4);
+    margin-top: 10px;
+    color: #FFF;
+    text-align: center;
+    line-height: 30px;
+}
+
+.archive {
+    overflow: hidden;
+}
+.archive img {
+    padding: 0;
+}
+.archive .title {
+    border-left: 5px solid #AD0000;
+    border-bottom: 1px solid #f0f0f0;
+    padding-left: 10px;
+}
+.archive .content {
+    margin-bottom: 50px;
+}
+
+.archive .content a {
+    display: block;
+    height: 55px;
+    width: 100%;
+    border-bottom: 1px dashed #dcdcdc;
+    color: #606060;
+    font-size: 16px;
+    line-height: 55px;
+    padding: 0 30px;
+}
+.archive .content a:hover,a:link {
+    text-decoration: none;
+}
+.archive .content a:hover {
+    background-color: #f0f0f0;
+}
+.archive .newsTitle{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.archive .newDate {
+    text-align: right;
+}
+
+
+.article {
+    padding: 0 30px;
+    font-size: 16px;
+    font-family: 宋体,"SimSun";
+    color: #606060;
+    letter-spacing: 1px;
+    overflow: hidden;
+}
+
+.article .postTitle {
+    height: 50px;
+    line-height: 50px;
+    margin-top: 20px;
+    text-align: center;
+}
+.article .buttons {
+    text-align: center;
+    margin: 20px 0;
+}
