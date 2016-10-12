@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学创平台|登录</title>
+    <script src = "https://cdn.wilddog.com/sdk/js/2.1.0/wilddog.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/platform-login.css">
+    <script type="text/javascript" src="/script/lib/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/script/lib/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+</head>
+<body>
+    <div class="wrap-flex">
+        <h1>学创平台登录</h1>
+        <div class="login-box">
+            <div class="login-title">
+                <p class="login-sign active">快速登录</p>
+                <p class="login-sign">快速注册</p>
+            </div>
+            
+            <!-- 登录表单 -->
+            <form class="form-horizontal signin-form" role="form">
+                <p class="tips text-danger"></p>
+                <div class="form-group">
+                    <label for="inputEmail1" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">邮箱</label>
+                    <div class="col-sm-8 col-xs-8">
+                      <input type="email" class="form-control" id="inputEmail1" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword1" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">密码</label>
+                    <div class="col-sm-8 col-xs-8">
+                        <input type="password" class="form-control" id="inputPassword1" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-5 col-xs-5 col-xs-offset-1">
+                        <div class="checkbox">
+                            <label><input type="checkbox"> 记住账号 </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button class="center-block btn btn-primary">登录</button>
+                    </div>
+                </div>
+            </form>
+            
+            <!-- 注册表单 -->
+            <form class="form-horizontal signup-form" role="form">
+                <p class="tips text-danger"></p>
+                <div class="form-group">
+                    <label for="inputEmail2" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">邮箱</label>
+                    <div class="col-sm-8 col-xs-8">
+                      <input type="email" class="form-control" id="inputEmail2" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword2" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">密码</label>
+                    <div class="col-sm-8 col-xs-8">
+                        <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label" style="padding:7px 0 0">确认密码</label>
+                    <div class="col-sm-8 col-xs-8">
+                        <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <button class="center-block btn btn-primary">注册</button>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="/js/platform-login.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html,body {
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
+    font-family: Microsoft Yahei;
+}
+
+@media screen and (max-width: 768px) {
+    * {
+        
+    }
+}
+
+body {
+    background: url('../image/platform-image/login-bg.jpg') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    align-items: center;  /*子元素垂直居中*/
+    justify-content: center;  /*子元素水平居中*/
+}
+
+.wrap-flex {
+    width: 22rem;
+    /*height: 300px;*/
+    background: #FFF;
+    border-radius: 3px;
+    box-shadow: 0 3px 8px #555;
+    position: relative;
+}
+
+.wrap-flex h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    position: absolute;
+    width: 100%;
+    top: -5rem;
+    color: #FFF;
+    text-shadow: 0px 2px 3px #555;
+}
+
+.login-box {
+
+}
+
+.login-box .login-title {
+    height: 50px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.login-box .login-sign {
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    cursor: pointer;
+    color: #999;
+    box-sizing: border-box;
+}
+.login-box .login-sign.active {
+    color: #222;
+    border-bottom: 3px solid #888;
+}
+.login-box .login-sign:hover {
+    color: #222;
+}
+
+.login-box .signin-form,.signup-form {
+    margin: 2rem 0;
+}
+.login-box .signup-form {
+    display: none;
+}
+
+.login-box .tips {
+    text-align: center;
+    margin-top: -1em;
+    display: none;
+}
