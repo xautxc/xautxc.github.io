@@ -1,0 +1,56 @@
+/*
+    引入字符图标
+ */
+@font-face {font-family: 'iconfont';
+    src: url('font-face/iconfont.eot'); /* IE9*/
+    src: url('font-face/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('font-face/iconfont.woff') format('woff'), /* chrome、firefox */
+    url('font-face/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('font-face/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.user-info {
+    /*height: 200px;*/
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-shadow: 0 1px 0 #f2f4f5;
+    margin-top: 100px;
+    padding: 20px;
+}
+
+.user-info button {
+    margin-top: 30px;
+}
+
+.user-info .introduction p{
+    padding-left: 4em;
+}
+.user-show {
+    /*display: none;*/
+}
+.user-show li {
+    margin: 10px 10px 0; 
+}
+.user-show .introduction p {
+    margin-top: 10px;
+    text-indent: 2em;
+}
+
+.user-edit {
+    margin-top: 20px;
+    display: none;
+}
+.user-edit textarea {
+    resize: none;
+}
+
+.user-edit label {
+    font-weight: normal;
+}

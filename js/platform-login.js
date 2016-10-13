@@ -78,6 +78,7 @@
                 $.cookie('userEmail','',{expires:7});
             }
             
+            //调用野狗API登录
             var userEmail = email.val(),
                 pwd = pw.val();
             wilddog.auth().signInWithEmailAndPassword(userEmail, pwd)
@@ -90,7 +91,7 @@
                     if(snapshot.val()[userkey] !== undefined){
                         //已建立用户信息
                         //。。。
-                        console.log('登陆成功1');
+                        console.log('登录成功1');
                     }else{
                         //未建立用户信息则添加
                         ref.child(userkey).set({
@@ -100,9 +101,9 @@
                             "displayName" : "",
                             "photoURL" : ""
                         });
-                        console.log('登陆成功2');
+                        console.log('登录成功2');
                     }
-                    location.href = "/platform/";            
+                    location.href = "/platform/";
                 });
                 console.log(user);
             }).catch(function (error) {
