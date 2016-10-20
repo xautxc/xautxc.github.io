@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>学创平台|用户中心</title>
     <script src = "https://cdn.wilddog.com/sdk/js/2.1.0/wilddog.js"></script>
+    <script type="text/javascript" src="/js/wilddogInit.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/platform-common.css">
     <link rel="stylesheet" href="/css/platform-user.css">
     <script type="text/javascript" src="/script/lib/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="/script/lib/bootstrap.min.js"></script>
-
 </head>
 <body>
     <header>
@@ -19,42 +19,42 @@
         <nav>
             <a href="#">首页</a>
             <a href="#">项目广场</a>
-            <a href="#">孵化基地</a>
-            <a href="#" class="active">个人中心</a>
+            <a href="#">创意集市</a>
+            <a href="user.html" class="active">个人中心</a>
         </nav>
-        <div class="nav-user">czh_xaut@163.com
+        <div class="nav-user">
+            <span class="nav-userName"></span><span class="caret"></span>
             <ul class="user-list">
-                <li><a href="#">个人中心</a></li>
-                <li><a href="#">设置</a></li>
-                <li><a href="#">退出登录</a></li>
+                <li><a href="user.html">个人中心</a></li>
+                <li><a href="#" class="user-quit">退出登录</a></li>
             </ul>
         </div>
     </header>
-    
+    <!-- 用户信息 -->
     <section class="user-info col-md-offset-2 col-md-5">
         <ul class="user-show">
             <li class="displayName">
-                <i class="iconfont">&#xe636;</i>
+                <i class="iconfont">&#xe601;</i>
                 <span>姓名：</span>
                 <span></span>
             </li>
             <li class="identity">
-                <i class="iconfont">&#xe641;</i>
+                <i class="iconfont">&#xe608;</i>
                 <span>身份：</span>
                 <span></span>
             </li>
             <li class="direction">
-                <i class="iconfont">&#xe6aa;</i>
+                <i class="iconfont">&#xe607;</i>
                 <span>方向：</span>
                 <span></span>
             </li>
             <li class="college">
-                <i class="iconfont">&#xe608;</i>
+                <i class="iconfont">&#xe605;</i>
                 <span>院系： </span>
                 <span></span>
             </li>
             <li class="qq">
-                <i class="iconfont">&#xe691;</i>
+                <i class="iconfont">&#xe603;</i>
                 <span>QQ ： </span>
                 <span></span>
             </li>
@@ -116,11 +116,71 @@
             <button class="btn btn-default center-block">保存信息</button>
         </form>
     </section>
-    
-    
-    
-    
-    
+    <!-- 控制挂件 -->
+    <section class="user-control col-md-offset-1 col-md-3">
+        <ul class="control-btns">
+            <li><button class="btn btn-default center-block addWord"  data-toggle="modal" data-target="#workModal"><i class="iconfont">&#xe602;</i> 发表项目</button></li>
+            <li><button class="btn btn-default center-block addIdea"><i class="iconfont">&#xe602;</i> 发表创意</button></li>
+        </ul>
+    </section>
+    <!-- 用户项目 -->
+    <section class="user-works col-md-offset-2 col-md-5">
+    </section>    
+    <!-- 发表项目摸态框 -->
+    <div class="modal fade" id="workModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">项目信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal work-edit" role="form">
+                        <div class="form-group">
+                            <label for="work-name" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">项目名称</label>
+                            <div class="col-sm-8 col-xs-8">
+                              <input type="text" class="form-control" id="work-name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="work-summary" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">项目简介</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <textarea class="form-control" rows="3" id="work-summary"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="work-progress" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">项目当前进度</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <textarea class="form-control" rows="3" id="work-progress"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="work-innovation" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">项目创新性</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <textarea class="form-control" rows="3" id="work-innovation"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="work-expect" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">发展期望</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <textarea class="form-control" rows="3" id="work-expect"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="work-problem" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">待解决的难题</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <textarea class="form-control" rows="3" id="work-problem"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="work-submit-btn">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <script type="text/javascript" src="/js/platform-common.js"></script>
     <script type="text/javascript" src="/js/platform-user.js"></script>

@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>学创平台|首页</title>
     <script src = "https://cdn.wilddog.com/sdk/js/2.1.0/wilddog.js"></script>
+    <script type="text/javascript" src="/js/wilddogInit.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/platform-common.css">
     <script type="text/javascript" src="/script/lib/jquery-1.11.1.min.js"></script>
@@ -18,14 +19,14 @@
         <nav>
             <a href="#" class="active">首页</a>
             <a href="#">项目广场</a>
-            <a href="#">孵化基地</a>
-            <a href="#">个人中心</a>
+            <a href="#">创意集市</a>
+            <a href="user.html">个人中心</a>
         </nav>
-        <div class="nav-user">czh_xaut@163.com
+        <div class="nav-user">
+            <span class="nav-userName"></span><span class="caret"></span>
             <ul class="user-list">
-                <li><a href="#">个人中心</a></li>
-                <li><a href="#">设置</a></li>
-                <li><a href="#">退出登录</a></li>
+                <li><a href="user.html">个人中心</a></li>
+                <li><a href="#" class="user-quit">退出登录</a></li>
             </ul>
         </div>
     </header>
@@ -38,37 +39,7 @@
     
     
     <script type="text/javascript" src="/js/platform-common.js"></script>
-    <script type="text/javascript">
-        // //创建 Wilddog Auth 实例
-        // var config = {
-        //     authDomain: "xautxc.wilddog.com",
-        //     syncURL: "https://xautxc.wilddogio.com"
-        // }
-        // wilddog.initializeApp(config);
-        // 
-        // //模拟账号登录
-        // var email = 'czh_xaut@163.com',
-        //     pwd = '123456';        
-        // wilddog.auth().signInWithEmailAndPassword(email, pwd)
-        //     .then(function(res){
-        //         var user = wilddog.auth().currentUser;
-        //         console.log(user);
-        //     }).catch(function (error) {
-        //         // 错误处理
-        //         console.log(error);
-        //     });
-        // 
-        // //获取已登录账号         
-        // wilddog.auth().onAuthStateChanged(function(user) {
-        //     if (user) {
-        //         document.querySelector('.hello').innerHTML = 'hello ' + user.email;
-        //         console.log(user);
-        //     } else {
-        //         console.log("no user");
-        //         // location.href = "login.html";
-        //     }
-        // });
-        
+    <script type="text/javascript">        
     </script>
 </body>
 </html>

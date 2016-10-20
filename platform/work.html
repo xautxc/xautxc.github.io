@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学创平台|项目信息</title>
+    <script src = "https://cdn.wilddog.com/sdk/js/2.1.0/wilddog.js"></script>
+    <script type="text/javascript" src="/js/wilddogInit.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/platform-common.css">
+    <link rel="stylesheet" href="/css/platform-work.css">
+    <script type="text/javascript" src="/script/lib/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/script/lib/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <header>
+        <h1 class="nav-logo"><a href="#"></a><span>学创平台</span></h1>
+        <nav>
+            <a href="#">首页</a>
+            <a href="#">项目广场</a>
+            <a href="#">创意集市</a>
+            <a href="user.html">个人中心</a>
+        </nav>
+        <div class="nav-user">
+            <span class="nav-userName"></span><span class="caret"></span>
+            <ul class="user-list">
+                <li><a href="user.html">个人中心</a></li>
+                <li><a href="#" class="user-quit">退出登录</a></li>
+            </ul>
+        </div>
+    </header>
+    
+    <section class="work-info col-md-offset-2 col-md-5">
+        <ul>
+            <li>
+                <span>项目名称：</span>
+                <p id="work-name">加载中...</p>
+            </li>
+            <li>
+                <span>项目作者：</span>
+                <p id="work-author"></p>
+            </li>
+            <li>
+                <span>项目简介：</span>
+                <p id="work-summary"></p>
+            </li>
+            <li>
+                <span>创新点：</span>
+                <p id="work-innovation"></p>
+            </li>
+            <li>
+                <span>项目进度：</span>
+                <p id="work-progress"></p>
+            </li>
+            <li>
+                <span>发展期望：</span>
+                <p id="work-expect"></p>
+            </li>
+            <li>
+                <span>所遇困难：</span>
+                <p id="work-problem"></p>
+            </li>
+        </ul>
+    </section>
+    
+    <!-- 控制挂件 -->
+    <section class="user-control col-md-offset-1 col-md-3">
+        <ul class="control-btns host">
+            <li><button class="btn btn-default center-block"  data-toggle="modal" data-target="#workModal"><i class="iconfont">&#xe60a;</i> 修改项目</button></li>
+            <li><button class="btn btn-default center-block" id="delete-btn"><i class="iconfont">&#xe609;</i> 删除项目</button></li>
+        </ul>
+        <ul class="control-btns visitor">
+            <li>
+                <button class="btn btn-default center-block addPrasie">
+                    <i class="iconfont">&#xe606; </i>
+                    <span id="work-praise"></span>
+                </button>
+            </li>
+        </ul>
+    </section>
+    
+    <section class="comment-widget col-md-offset-1 col-md-3">
+        <h4>评论<span id="comment-add">添加评论</span></h4>
+        <div class="comment-publish">
+            <textarea name="name" rows="5" id="commentInput"></textarea>
+            <div class="comment-btns">
+                <button class="btn btn-primary btn-sm">提交</button>
+                <button class="btn btn-danger btn-sm">取消</button>
+            </div>
+        </div>
+        <ul class="comment-body">
+        </ul>
+    </section>
+    
+    <!-- 发表项目摸态框 -->
+    <div class="modal fade" id="workModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">项目信息</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal work-edit" role="form">
+                        <div class="form-group">
+                            <label for="work-name" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">项目名称</label>
+                            <div class="col-sm-8 col-xs-8">
+                              <input type="text" class="form-control" id="modal-work-name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="work-summary" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">项目简介</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <textarea class="form-control" rows="3" id="modal-work-summary"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="work-progress" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">项目当前进度</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <textarea class="form-control" rows="3" id="modal-work-progress"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="work-innovation" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">项目创新性</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <textarea class="form-control" rows="3" id="modal-work-innovation"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="work-expect" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">发展期望</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <textarea class="form-control" rows="3" id="modal-work-expect"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="work-problem" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">待解决的难题</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <textarea class="form-control" rows="3" id="modal-work-problem"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="work-submit-btn">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="/js/platform-common.js"></script>
+    <script type="text/javascript" src="/js/platform-work.js"></script>
+</body>
+</html>

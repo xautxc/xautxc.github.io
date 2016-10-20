@@ -103,7 +103,7 @@
                         });
                         console.log('登录成功2');
                     }
-                    location.href = "/platform/";
+                    location.href = "user.html";
                 });
                 console.log(user);
             }).catch(function (error) {

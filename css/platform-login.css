@@ -9,12 +9,6 @@ html,body {
     font-family: Microsoft Yahei;
 }
 
-@media screen and (max-width: 768px) {
-    * {
-        
-    }
-}
-
 body {
     background: url('../image/platform-image/login-bg.jpg') no-repeat center center;
     background-size: cover;
