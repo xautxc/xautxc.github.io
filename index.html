@@ -32,7 +32,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="/">首页</a></li>
-                <li><a href="#">学创平台</a></li>
+                <li><a href="/platform/index.html">学创平台</a></li>
                 <li><a href="/archives/">新闻中心</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">关于学创<span class="caret"></span></a>
@@ -142,6 +142,11 @@
         <p>孵化优秀的创意</p>
         <p>从这里开始</p>
         <button type="button" class="btn btn-success btn-lg" id="go2platform">开始体验</button>
+        <script>
+            $('#go2platform').click(function(){
+                location.href = "/platform/index.html";
+            })
+        </script>
     </div>    
 </section>
 
