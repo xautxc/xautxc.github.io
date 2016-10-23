@@ -6,6 +6,13 @@
     };
     wilddog.initializeApp(config);
     
+    //登录检测         
+    wilddog.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            location.href = "index.html";
+        }
+    });
+    
     //保存当前状态
     var state = 'signin';
     
@@ -90,22 +97,25 @@
                 ref.once('value',function(snapshot){
                     if(snapshot.val()[userkey] !== undefined){
                         //已建立用户信息
-                        //。。。
                         console.log('登录成功1');
                     }else{
                         //未建立用户信息则添加
                         ref.child(userkey).set({
                             "email" : user.email,
-                            "emailVerified" : user.emailVerified,
                             "uid" : user.uid,
                             "displayName" : "",
-                            "photoURL" : ""
                         });
                         console.log('登录成功2');
                     }
-                    location.href = "user.html";
+                    
+                    if(user.emailVerified){
+                        location.href = "user.html";
+                    }else{
+                        alert('请前往邮箱验证后再登录。');
+                        wilddog.auth().signOut();
+                    }
+                    
                 });
-                console.log(user);
             }).catch(function (error) {
                 // 错误处理
                 console.log(error);

@@ -1,0 +1,80 @@
+.works-info {
+    margin-top: 100px;
+    padding: 20px;
+}
+.works-info h3 {
+    color: #e50012;
+}
+
+.works {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 12px rgba(0,0,0,.1);
+    padding: 20px;
+}
+.works li {
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.works-info .work-summary {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-indent: 2rem;
+}
+.work-detail{
+    color: #888;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.works-info .work-detail:hover,.work-more:hover {
+    color: #333;
+}
+
+.works li:nth-last-of-type(1) {
+    text-align: right;
+}
+
+.widget {
+    margin-top: 160px;
+    padding: 20px;
+}
+.widget h3,h4 {
+    text-align: center;
+    color: #e50012;
+}
+
+.search-reasult {
+    margin-top: 10px;
+    display: none;
+}
+
+.hot-work {
+    padding: 0 20px 20px;
+    margin-top: 50px;
+}
+
+.hot-work h3 {
+    box-shadow: 0 1px 0 #f2f4f5;
+    padding-bottom: 10px;
+}
+
+.work-list li {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.work-list li span {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.work-list li span:hover {
+    cursor: pointer;
+    color: #e50012;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学创平台 | 项目广场</title>
+    <script src = "https://cdn.wilddog.com/sdk/js/2.1.0/wilddog.js"></script>
+    <script type="text/javascript" src="/js/wilddogInit.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/platform-common.css">
+    <link rel="stylesheet" href="/css/platform-square.css">
+    <script type="text/javascript" src="/script/lib/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/script/lib/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <header>
+        <h1 class="nav-logo"><a href="index.html"></a><span>学创平台</span></h1>
+        <nav>
+            <a href="index.html">首页</a>
+            <a href="square.html" class="active">项目广场</a>
+            <a href="#">创意集市</a>
+            <a href="user.html">个人中心</a>
+        </nav>
+        <div class="nav-user">
+            <span class="nav-userName"></span><span class="caret"></span>
+            <ul class="user-list">
+                <li><a href="user.html">个人中心</a></li>
+                <li><a href="#" class="user-quit">退出登录</a></li>
+            </ul>
+        </div>
+    </header>
+    
+    <!-- 优秀项目 -->
+    <section class="works-info  col-md-offset-2 col-md-5">
+        <h3 class="work-title">项目列表</h3>
+    </section>
+    
+    <!-- 控制挂件 -->
+    <section class="widget col-md-offset-1 col-md-3">
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <input type="text" class="form-control" id="search-input" placeholder="请输入项目名称">
+            </div>
+            <button class="btn btn-default" id="btn-search">搜索</button>
+        </form>
+        <!-- 搜索结果 -->
+        <div class="search-reasult"></div>
+        <!-- 热门项目 -->
+        <div class="hot-work">
+            <h3>热门项目</h3>
+            <ul class="work-list">
+                
+            </ul>
+        </div>
+    </section>
+    
+    <script type="text/javascript" src="/js/platform-common.js"></script>
+    <script type="text/javascript" src="/js/platform-square.js"></script>
+</body>
+</html>
