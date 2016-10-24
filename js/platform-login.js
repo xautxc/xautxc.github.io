@@ -8,7 +8,7 @@
     
     //登录检测         
     wilddog.auth().onAuthStateChanged(function(user) {
-        if (user) {
+        if (user && user.emailVerified) {
             location.href = "index.html";
         }
     });
