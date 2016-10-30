@@ -6,34 +6,20 @@ $(function(){
         } 
     });
     
-    //点赞按钮
-    $('.addPrasie').click(function(){
-        var ref = '/works/',
-            workID = localStorage.workID,
-            workRef = wilddog.sync().ref(ref + workID);
-        //计算点赞后的结果
-        var praiseNums = parseInt($('#work-praise').html()) + 1;
-        //更新后台数据
-        workRef.update({praise : praiseNums});
-        //后台追加用户邮箱到已点赞列表
-        var followersRef = workRef.child('followers'),
-            userEmail = wilddog.auth().currentUser.email;
-        followersRef.push({user : userEmail});
-        //更新页面数据
-        $('#work-praise').html(praiseNums);
-        //禁用点赞按钮
-        $('.addPrasie').attr('disabled','disabled');
-    });
+
     
     //页面显示初始化
     function workInit(user){
         var ref = '/works/',
             workID = localStorage.workID,
-            workRef = wilddog.sync().ref(ref + workID);
+            workRef = wilddog.sync().ref(ref + workID),
+            memberRef = workRef.child('members');
         workRef.once('value', function(snapshot) {
             work = snapshot.val();
             //项目表单初始化
             workFormInit(work);
+            //项目参与者表单初始化
+            memberInit(memberRef);
             //挂件初始化
             controlWidgetInit(work,user,workRef);
             //评论框初始化
@@ -65,8 +51,10 @@ $(function(){
             $('.host').show();
             //禁用点赞按钮
             $('.addPrasie').attr('disabled','disabled');
-
-        }else {//当前用户非该项目原作者  
+            //隐藏加入项目按钮
+            $('.visitor').hide();
+        }else {
+            //当前用户非该项目原作者  
             var followersRef = workRef.child('followers');    
             // 根据email查询当前用户是否为该用户点赞
             followersRef.orderByChild('user')
@@ -82,6 +70,20 @@ $(function(){
                 });
         }
         
+        // 初始化加入项目按钮
+        workRef.child('members').orderByChild('email')
+            .startAt(user.email)
+            .endAt(user.email)
+            .once('value',function(snapshot){
+                var member = snapshot.val();
+                //如果查询到是项目成员
+                if(member !== null){
+                    $('#join-btn').html('退出项目');
+                }else{
+                    $('#join-btn').html('加入项目');
+                }
+            });
+        
         //删除项目按钮
         $('#delete-btn').click(function(){
             if(confirm("确定删除该项目吗？")){
@@ -89,6 +91,79 @@ $(function(){
                 location.href = "user.html";
             }
         });
+        
+        //点赞按钮
+        $('.addPrasie').click(function(){
+            var ref = '/works/',
+                workID = localStorage.workID,
+                workRef = wilddog.sync().ref(ref + workID);
+            //计算点赞后的结果
+            var praiseNums = parseInt($('#work-praise').html()) + 1;
+            //更新后台数据
+            workRef.update({praise : praiseNums});
+            //后台追加用户邮箱到已点赞列表
+            var followersRef = workRef.child('followers'),
+                userEmail = wilddog.auth().currentUser.email;
+            followersRef.push({user : userEmail});
+            //更新页面数据
+            $('#work-praise').html(praiseNums);
+            //禁用点赞按钮
+            $('.addPrasie').attr('disabled','disabled');
+        });
+        
+        //加入/退出 项目按钮
+        $('#join-btn').click(function(){
+            var memberRef = workRef.child('members'),
+                userRef = wilddog.sync().ref('/user/' + userID);
+            //数据更新
+            userRef.once('value', function(snapshot) {
+                userDetail = snapshot.val();
+                // 根据email查询当前用户是否为项目成员
+                memberRef.orderByChild('email')
+                    .startAt(user.email)
+                    .endAt(user.email)
+                    .once('value',function(snapshot){
+                        var member = snapshot.val();
+                        //如果查询到是项目成员
+                        if(member !== null){
+                            for(var item in member){
+                                memberRef.child(item).remove();
+                            }
+                            $('#join-btn').html('加入项目');
+                            alert('已退出该项目!');
+                        }else{
+                            var memberInfo = {
+                                email : user.email,
+                                job : '组员',
+                                name : user.displayName,
+                                qq : userDetail.qq
+                            };
+                            if(userDetail.identity && userDetail.identity == 'teacher'){
+                                memberInfo.job = '指导老师';
+                            }
+                            memberRef.push(memberInfo);
+                            $('#join-btn').html('退出项目');
+                            alert('已加入该项目,请联系组长了解项目的详细信息。');
+                        }
+                        //更新UI
+                        memberInit(memberRef);
+                    });
+            }); 
+        });
+    }
+    
+    //项目参与者列表
+    function memberInit(memberRef){
+        memberRef.once('value',function(snapshot){
+            var members = snapshot.val();
+            $('.member-info').html('<thead><th>姓名</th><th>职位</th><th>邮箱</th><th>QQ</th></thead>');
+            for(var item in members){
+                var member = members[item];
+                var html = '<tr><td>'+ member.name +'</td><td>'+member.job+'</td><td>'+ member.email +'</td><td>'+ member.qq +'</td></tr>';
+                $('.member-info').append(html);
+            }
+        });
+        
     }
     
     //评论框初始化
@@ -171,5 +246,9 @@ $(function(){
             //隐藏模态框
             $('#workModal').modal('hide');
         });
+    }
+    
+    function joinInit(){
+        
     }
 });

@@ -54,32 +54,42 @@ $(function(){
     $('#work-submit-btn').click(function(){
         //获取发表项目的表单数据
         var workInfo = getWorkInfo();
-        //数据增强
         //获取当前的用户
         var user = wilddog.auth().currentUser,
             userID = user.email.split('.')[0];
-        //添加work-date
-        var nowDate = new Date();
-        workInfo.date = nowDate.getFullYear() + '/' + (nowDate.getMonth() + 1) + '/' + nowDate.getDate();
-        //添加work-origin
-        workInfo.origin = userID;
-        //添加work-author
-        workInfo.author = user.displayName ?　user.displayName : user.email;
-        //添加获赞数
-        workInfo.praise = 0;
-        
-        //野狗远端追加子节点
-        var workRef = wilddog.sync().ref("/works");
-        workRef.push(workInfo);
-        
-        //更新页面的项目信息
-        var html = $(".user-works").html();
-        html += buildWorksNode(workInfo);
-        $(".user-works").html(html);
-        
-        
-        //隐藏模态框
-        $('#workModal').modal('hide');
+        wilddog.sync().ref("/user/" + userID).once('value',function(snapshot){
+            //数据增强
+            //添加work-date
+            var nowDate = new Date();
+            workInfo.date = nowDate.getFullYear() + '/' + (nowDate.getMonth() + 1) + '/' + nowDate.getDate();
+            //添加work-origin
+            workInfo.origin = userID;
+            //添加work-author
+            workInfo.author = user.displayName ?　user.displayName : user.email;
+            //添加获赞数
+            workInfo.praise = 0;
+            //项目成员
+            workInfo.members = {
+                author : {
+                    email : user.email,
+                    job : '组长',
+                    name : user.displayName,
+                    qq : snapshot.val().qq
+                }
+            };
+            
+            //野狗远端追加子节点
+            var workRef = wilddog.sync().ref("/works");
+            workRef.push(workInfo);
+            
+            //更新页面的项目信息
+            var html = $(".user-works").html();
+            html += buildWorksNode(workInfo);
+            $(".user-works").html(html);
+            
+            //隐藏模态框
+            $('#workModal').modal('hide');
+        });
     });    
     
     
