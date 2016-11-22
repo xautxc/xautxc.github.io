@@ -9,7 +9,7 @@
     //登录检测         
     wilddog.auth().onAuthStateChanged(function(user) {
         if (user && user.emailVerified) {
-            location.href = "index.html";
+            //location.href = "index.html";
         }
     });
     
@@ -88,34 +88,60 @@
             //调用野狗API登录
             var userEmail = email.val(),
                 pwd = pw.val();
+            //邮箱登录
             wilddog.auth().signInWithEmailAndPassword(userEmail, pwd)
                 .then(function(res){
+                //登录成功
                 var user = wilddog.auth().currentUser;
-                var ref = wilddog.sync().ref("/user");
-                var userkey = user.email.split('.')[0];
-                //判断是否建立用户信息
-                ref.once('value',function(snapshot){
-                    if(snapshot.val()[userkey] !== undefined){
-                        //已建立用户信息
-                        console.log('登录成功1');
-                    }else{
-                        //未建立用户信息则添加
-                        ref.child(userkey).set({
-                            "email" : user.email,
-                            "uid" : user.uid,
-                            "displayName" : "",
-                        });
-                        console.log('登录成功2');
-                    }
+                //用户是否验证邮箱
+                if(user.emailVerified){
+                    var userRef = wilddog.sync().ref("/user");
+                    var userkey = user.uid;
                     
-                    if(user.emailVerified){
-                        location.href = "user.html";
-                    }else{
-                        alert('请前往邮箱验证后再登录。');
-                        wilddog.auth().signOut();
-                    }
-                    
-                });
+                    //判断是否建立用户信息
+                    userRef.once('value',function(snapshot){
+                        var userObj = snapshot.val();
+                        //判断是否是新用户
+                        if(userObj && userObj[userkey] !== undefined){
+                            //已建立用户信息(老用户)
+                            //登录成功，跳转至首页
+                            location.href = "index.html";
+                        }else{
+                            //未建立用户信息(新用户)或未审核
+                            var pendingRef = wilddog.sync().ref("/pending");
+                            pendingRef.once('value',function(snapshot){
+                                var pendingObj = snapshot.val();
+                                //判断是否审核中
+                                if(pendingObj && pendingObj[userkey] !== undefined){
+                                    //审核中
+                                    console.log('审核中');
+                                    //审核中，跳转至首页，操作受限
+                                    location.href = "index.html";
+                                }else{
+                                    //判断是否审核未通过
+                                    var notpassRef = wilddog.sync().ref("/notpass");
+                                    notpassRef.once('value',function(snapshot){
+                                        var notpassObj = snapshot.val();
+                                        if(notpassObj && notpassObj[userkey]){
+                                            //审核未通过
+                                            console.log('审核未通过');
+                                            console.log(notpassObj[userkey]);
+                                        }else{
+                                            //未录入信息
+                                            console.log('未录入信息');
+                                            alert('初次登陆请认真填写相关信息，信息将进行真实性审核。');
+                                        }
+                                        //跳转至信息录入界面
+                                        location.href = "newuser.html";
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }else{
+                    alert('请前往邮箱验证后再登录。');
+                    wilddog.auth().signOut();
+                }                
             }).catch(function (error) {
                 // 错误处理
                 console.log(error);

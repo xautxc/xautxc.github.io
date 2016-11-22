@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学创平台 | 用户信息</title>
+    <script src = "https://cdn.wilddog.com/sdk/js/2.1.0/wilddog.js"></script>
+    <script type="text/javascript" src="/js/wilddogInit.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/platform-newuser.css">
+    <script type="text/javascript" src="/script/lib/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/script/lib/bootstrap.min.js"></script>
+</head>
+<body>
+    <!-- 职位入口选择 -->
+    <div class="wrap-flex">
+        <h1>用户信息录入</h1>
+        <button class="btn btn-info btn-lg btn-block center-block" id="teach-enter">教师入口</button>
+        <button class="btn btn-info btn-lg btn-block center-block" id="stu-enter">学生入口</button>
+    </div>
+    
+    <!-- 学生信息 -->
+    <section class="user-info stu-info col-sm-8">
+        <ul>
+            <li>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <label for="stuName">姓名</label>
+                    <input type="text" class="form-control" id="stuName">
+                </div>
+                <div class="col-sm-5">
+                    <label for="stuNum">学号</label>
+                    <input type="text" class="form-control" id="stuNum">
+                </div>
+            </li>
+            <li>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <label for="stuClass">班级</label>
+                    <input type="text" class="form-control" id="stuClass">
+                </div>
+                <div class="col-sm-5">
+                    <label for="stuPhone">手机号</label>
+                    <input type="text" class="form-control" id="stuPhone">
+                </div>
+            </li>
+            <li>
+                <div class="col-sm-10 col-sm-offset-1">
+                    <label for="stuSkill">技能特长</label>
+                    <textarea class="form-control" rows="5" id="stuSkill"></textarea>
+                </div>
+            </li>
+            <li>
+                <div class="col-sm-10 col-sm-offset-1">
+                    <label for="stuIntroduction">个人简介</label>
+                    <textarea class="form-control" rows="5" id="stuIntroduction"></textarea>
+                </div>
+            </li>
+            <li>
+                <div class="col-sm-4 col-sm-offset-4">
+                    <a href="#" class="btn btn-info btn-lg center-block btn-block" role="button" id="stu-btn">提交</a>
+                </div>
+            </li>
+        </ul>
+    </section>
+    
+    <!-- 老师信息 -->
+    <section class="user-info teach-info col-sm-8">
+        <ul>
+            <li>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <label for="teachName">姓名</label>
+                    <input type="text" class="form-control" id="teachName">
+                </div>
+                <div class="col-sm-5">
+                    <label for="teachNum">工号</label>
+                    <input type="text" class="form-control" id="teachNum">
+                </div>
+            </li>
+            <li>
+                <div class="col-sm-5 col-sm-offset-1">
+                    <label for="teachClass">院系</label>
+                    <input type="text" class="form-control" id="teachClass">
+                </div>
+                <div class="col-sm-5">
+                    <label for="teachPhone">手机号</label>
+                    <input type="text" class="form-control" id="teachPhone">
+                </div>
+            </li>
+            <li>
+                <div class="col-sm-10 col-sm-offset-1">
+                    <label for="teachIndex">教师个人主页网址</label>
+                    <input type="text" class="form-control" id="teachIndex">
+                </div>
+            </li>
+            <li>
+                <div class="col-sm-10 col-sm-offset-1">
+                    <label for="teachSkill">研究方向</label>
+                    <textarea class="form-control" rows="5" id="teachSkill"></textarea>
+                </div>
+            </li>
+            <li>
+                <div class="col-sm-10 col-sm-offset-1">
+                    <label for="teachIntroduction">个人简介</label>
+                    <textarea class="form-control" rows="5" id="teachIntroduction"></textarea>
+                </div>
+            </li>
+            <li>
+                <div class="col-sm-4 col-sm-offset-4">
+                    <a href="#" class="btn btn-info btn-lg center-block btn-block" role="button" id="teach-btn">提交</a>
+                </div>
+            </li>
+        </ul>
+    </section>
+    
+    <script type="text/javascript" src="/js/platform-newuser.js"></script>
+</body>
+</html>

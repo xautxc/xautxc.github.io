@@ -14,6 +14,26 @@
     //标题栏用户名显示       
     wilddog.auth().onAuthStateChanged(function(user) {
         if (user) {
+            //判断该用户信息是否通过审核  
+            var pendingRef = wilddog.sync().ref("/pending/" + user.uid);
+            pendingRef.once('value',function(snapshot){
+                var userObj = snapshot.val();
+                //等待审核的用户
+                if(userObj !== null){
+                    //无法访问个人中心页面
+                    $("a[href='user.html']").click(function(e){
+                        e.preventDefault();
+                        alert('你的资料尚未通过审核，部分功能受限');
+                    });
+                    //隐藏用户控制操作按钮(user.html & work.html)
+                    $(".user-control").remove();
+                    //禁止评论
+                    $("#comment-add").remove();
+                }
+            });
+            
+            
+            //标题栏用户名显示 
             if(wilddog.auth().currentUser !== null){
                 $(".nav-userName").html(wilddog.auth().currentUser.displayName);
             }else{
