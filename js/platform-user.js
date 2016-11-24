@@ -1,40 +1,9 @@
 $(function(){
-    /*
-        用户信息界面逻辑
-     */
-    $('.user-show button').click(function(){
-        $('.user-show').toggle();
-        $('.user-edit').toggle();
-    });
-    
-    $('.user-edit button').click(function(e){
-        e.preventDefault();
-        
-        //点击保存编辑修改远端数据
-        var user = wilddog.auth().currentUser,
-            ref = wilddog.sync().ref("/user"),
-            id = user.email.split('.')[0],
-            node = ref.child(id);
-        //获取表单的数据
-        var ids = ['displayName','direction','college','major','qq','introduction'],
-            data = getUserInfo(ids);
-        //更新远程数据    
-        node.update(data);  
-        //更新用户属性
-        wilddog.auth().currentUser.updateProfile({
-            displayName : data.displayName
-        });
-        //更新页面数据
-        showUserInfo(data);
-        
-        $('.user-edit').toggle();
-        $('.user-show').toggle();
-    });
     
     //获取登录用户
     wilddog.auth().onAuthStateChanged(function(user) {
         if (user) {
-            var userID = user.email.split('.')[0];
+            var userID = user.uid;
             var ref = wilddog.sync().ref("/user"),
                 workRef = wilddog.sync().ref("/works");
             //显示用户信息
@@ -44,7 +13,19 @@ $(function(){
             });
             //显示作品信息
             showUserWork(workRef,userID);
+            
+            showUserJoinin(userID);
         }
+    });
+    
+    /**
+     * 查看项目详细信息
+     */
+    $(".user-works").on('click','.work-detail',function(){
+        var workID = $(this).parent().parent().attr('name');
+        //项目的ID用localStorage保存
+        localStorage.workID = workID;
+        location.href = 'work.html';
     });
     
     
@@ -56,8 +37,9 @@ $(function(){
         var workInfo = getWorkInfo();
         //获取当前的用户
         var user = wilddog.auth().currentUser,
-            userID = user.email.split('.')[0];
+            userID = user.uid;
         wilddog.sync().ref("/user/" + userID).once('value',function(snapshot){
+            var userObj = snapshot.val();
             //数据增强
             //添加work-date
             var nowDate = new Date();
@@ -65,22 +47,37 @@ $(function(){
             //添加work-origin
             workInfo.origin = userID;
             //添加work-author
-            workInfo.author = user.displayName ?　user.displayName : user.email;
+            workInfo.author = user.displayName;
             //添加获赞数
             workInfo.praise = 0;
             //项目成员
-            workInfo.members = {
-                author : {
-                    email : user.email,
-                    job : '组长',
-                    name : user.displayName,
-                    qq : snapshot.val().qq
-                }
-            };
+            if(userObj.identity == 'student'){
+                workInfo.members = {
+                    author : {
+                        email : user.email,
+                        job : '组长',
+                        name : user.displayName,
+                        clazz : userObj.stuClass
+                    }
+                };
+            }else{
+                workInfo.members = {
+                    author : {
+                        email : user.email,
+                        job : '指导教师',
+                        name : user.displayName,
+                        clazz : userObj.teachClass
+                    }
+                };
+            }
+            
             
             //野狗远端追加子节点
             var workRef = wilddog.sync().ref("/works");
-            workRef.push(workInfo);
+            workRef.push(workInfo,function(){
+                alert('发表成功');
+                location.reload();
+            });
             
             //更新页面的项目信息
             var html = $(".user-works").html();
@@ -106,23 +103,34 @@ $(function(){
                 for(var item in userWorks){
                     userWorksHtml += buildWorksNode(userWorks[item],item);
                 }
-                $(".user-works").html(userWorksHtml);
                 
-                /**
-                 * 查看项目详细信息
-                 */
-                $(".work-detail").click(function(){
-                    var workID = $(this).parent().parent().attr('name');
-                    //项目的ID用localStorage保存
-                    localStorage.workID = workID;
-                    location.href = 'work.html';
-                });
+                userWorksHtml += $(".user-works").html();
+                $(".user-works").html(userWorksHtml);
             }); 
+    }
+    
+    //显示用户参与的项目
+    function showUserJoinin(userID){
+        var joininRef = wilddog.sync().ref("/user/" + userID + "/joinin"),
+            workRef = wilddog.sync().ref("/works");
+        joininRef.once('value',function(snapshot){
+            var joinWorks = snapshot.val(),
+                worksID = Object.values(joinWorks);
+            for(var workid of worksID){
+                workRef.child(workid).once('value',function(snapshot){
+                    var userWorksHtml = $(".user-works").html();
+                    var html = buildWorksNode(snapshot.val(),snapshot.key());
+                    
+                    userWorksHtml += html;
+                    $(".user-works").html(userWorksHtml);
+                });
+            }
+        });
     }
     
     //生成项目信息节点的HTML
     function buildWorksNode(obj,workKey){
-        var html = "<ul class='works' name='"+ workKey +"'><li><span>项目名称： </span><span class='work-name'>"+ obj.name +"</span></li><li><span>发布时间： </span><span class='work-date'>"+ obj.date +"</span></li><li><span>项目简介： </span><p class='work-summary'>"+ obj.summary +"</p></li><li><i class='iconfont'>&#xe606; </i><span class='work-praise'>"+ obj.praise +"</span><span class='work-detail'>详细信息</span></li></ul>";
+        var html = "<ul class='works' name='"+ workKey +"'><li><span>项目名称： </span><span class='work-name'>"+ obj.name +"</span></li><li><span>发布时间： </span><span class='work-date'>"+ obj.date +"</span></li><li><span>项目简介： </span><span class='work-summary'>"+ obj.summary +"</span></li><li><i class='iconfont'>&#xe606; </i><span class='work-praise'>"+ obj.praise +"</span><span class='work-detail'>详细信息</span></li></ul>";
         return html;
     }    
         
@@ -142,51 +150,20 @@ $(function(){
     //更新页面的用户信息
     function showUserInfo(userInfo){
         var selector;
+        var props = [];
         //展示界面
-        var prop = ["displayName","identity","direction","qq"];
-        for(var item of prop){
-            selector = '.' + item + ' span';
-            $(selector).eq(1).html(userInfo[item]);
-        }
-        //院系信息
-        $(".college span").eq(1).html(userInfo['college'] + ' / ' + userInfo['major']);
-        //简介
-        $('.introduction p').eq(0).html(userInfo['introduction']);
-        
-        //编辑页面
-        prop = ["displayName","direction","qq","college","major","introduction"];
-        for(var item of prop){
-            selector = '#' + item;
-            $(selector).val(userInfo[item]);
-        }
-        //职位信息
-        if(userInfo['identity'] == 'student'){
-            $('#optionsRadios1').prop("checked", function( i, val ) {
-                return !val;
-            });
+        if(userInfo.identity == 'student'){
+            $('#stuInfo').show();
+            $('#teachInfo').remove();
+            props = ["stuName","stuNum","stuEmail","identity","stuClass","stuSkill","stuIntroduction",'stuColleage','stuMajor'];
         }else{
-            $('#optionsRadios2').prop("checked", function( i, val ) {
-                return !val;
-            });
+            $('#stuInfo').remove();
+            $('#teachInfo').show();
+            props = ["teachName","teachNum","teachEmail","identity","teachClass","teachSkill","teachIntroduction",'teachIndex'];
+        }
+        for(var prop of props){
+            $('#'+prop).text(userInfo[prop]);
         }
     }
-    
-    //获取表单数据
-    //输入为节点ID数组
-    //返回为数据对象
-    function getUserInfo(ids){
-        var selector,
-            data = {};
-        for(var item of ids){
-            selector = '#' + item;
-            data[item] = $(selector).val();
-        }
-        //radio数据读取
-        if($('#optionsRadios1').prop('checked')){
-            data['identity'] = 'student';
-        }else{
-            data['identity'] = 'teacher';
-        }
-        return data;
-    }
+
 });

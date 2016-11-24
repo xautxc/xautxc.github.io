@@ -44,7 +44,7 @@ $(function(){
     //控制挂件初始化
     function controlWidgetInit(work,user,workRef){
         var userEmail = user.email,
-            userID = userEmail.split('.')[0];
+            userID = user.uid;
         //如果当前用户是该项目的作者
         if(userID == work.origin){
             //显示控制挂件
@@ -52,8 +52,9 @@ $(function(){
             //禁用点赞按钮
             $('.addPrasie').attr('disabled','disabled');
             //隐藏加入项目按钮
-            $('.visitor').hide();
+            $('.visitor').remove();
         }else {
+            $('.host').remove();
             //当前用户非该项目原作者  
             var followersRef = workRef.child('followers');    
             // 根据email查询当前用户是否为该用户点赞
@@ -114,7 +115,8 @@ $(function(){
         //加入/退出 项目按钮
         $('#join-btn').click(function(){
             var memberRef = workRef.child('members'),
-                userRef = wilddog.sync().ref('/user/' + userID);
+                userRef = wilddog.sync().ref('/user/' + userID),
+                workID = localStorage.workID;
             //数据更新
             userRef.once('value', function(snapshot) {
                 userDetail = snapshot.val();
@@ -126,24 +128,47 @@ $(function(){
                         var member = snapshot.val();
                         //如果查询到是项目成员
                         if(member !== null){
+                            //删除该项目member节点下用户信息
                             for(var item in member){
+                                var joininID = member[item].joininID;
                                 memberRef.child(item).remove();
                             }
+                            //删除该用户joinin节点下的项目信息
+                            var joinRef = wilddog.sync().ref('/user/' + userID +'/joinin/' + joininID);
+                            joinRef.remove();
+                            //修改界面显示
                             $('#join-btn').html('加入项目');
                             alert('已退出该项目!');
                         }else{
                             var memberInfo = {
                                 email : user.email,
                                 job : '组员',
-                                name : user.displayName,
-                                qq : userDetail.qq
+                                name : user.displayName
                             };
+                            
                             if(userDetail.identity && userDetail.identity == 'teacher'){
                                 memberInfo.job = '指导老师';
+                                memberInfo.clazz = userDetail.teachClass;
+                            }else{
+                                memberInfo.clazz = userDetail.stuClass;
                             }
-                            memberRef.push(memberInfo);
-                            $('#join-btn').html('退出项目');
-                            alert('已加入该项目,请联系组长了解项目的详细信息。');
+                            
+                            //用户路径下的joinin节点添加该项目的key作为value
+                            var joinRef = wilddog.sync().ref('/user/' + userID +'/joinin');
+                            var backRef = joinRef.push(workID,function(){
+                                backRef.once('value',function(snapshot){
+                                    var newKey = snapshot.key();
+                                    memberInfo.joininID = newKey;
+                                    
+                                    //项目路径下的member节点更新用户信息
+                                    memberRef.push(memberInfo);
+                                    
+                                    $('#join-btn').html('退出项目');
+                                    alert('已加入该项目,请联系组长了解项目的详细信息。');
+                                    //更新UI
+                                    memberInit(memberRef);
+                                });
+                            });
                         }
                         //更新UI
                         memberInit(memberRef);
@@ -156,10 +181,10 @@ $(function(){
     function memberInit(memberRef){
         memberRef.once('value',function(snapshot){
             var members = snapshot.val();
-            $('.member-info').html('<thead><th>姓名</th><th>职位</th><th>邮箱</th><th>QQ</th></thead>');
+            $('.member-info').html('<thead><th>姓名</th><th>班级</th><th>邮箱</th><th>职位</th></thead>');
             for(var item in members){
                 var member = members[item];
-                var html = '<tr><td>'+ member.name +'</td><td>'+member.job+'</td><td>'+ member.email +'</td><td>'+ member.qq +'</td></tr>';
+                var html = '<tr><td>'+ member.name +'</td><td>'+member.clazz+'</td><td>'+ member.email +'</td><td>'+ member.job +'</td></tr>';
                 $('.member-info').append(html);
             }
         });
@@ -196,6 +221,7 @@ $(function(){
             //更新页面
             $('.no-comment').remove();
             $('.comment-body').prepend(createCommentDom(commentObj));
+            $('#commentInput').val('');
         });
         
         //构建评论列表
@@ -248,7 +274,4 @@ $(function(){
         });
     }
     
-    function joinInit(){
-        
-    }
 });

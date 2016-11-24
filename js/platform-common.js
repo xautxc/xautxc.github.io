@@ -14,12 +14,17 @@
     //标题栏用户名显示       
     wilddog.auth().onAuthStateChanged(function(user) {
         if (user) {
+            //限制管理员访问权限
+            if(user.uid == '50118fa1bef63e14a3dda2ce6462'){
+                location.href = "admin.html";
+            }
+            
             //判断该用户信息是否通过审核  
-            var pendingRef = wilddog.sync().ref("/pending/" + user.uid);
-            pendingRef.once('value',function(snapshot){
+            var userRef = wilddog.sync().ref("/user/" + user.uid);
+            userRef.once('value',function(snapshot){
                 var userObj = snapshot.val();
                 //等待审核的用户
-                if(userObj !== null){
+                if(userObj.state !== '2'){
                     //无法访问个人中心页面
                     $("a[href='user.html']").click(function(e){
                         e.preventDefault();

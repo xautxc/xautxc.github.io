@@ -24,10 +24,11 @@ $(function(){
     studentRef.once('value',function(snapshot){
         var studentID = snapshot.val();
         //通过ID查找对应的用户
+        userRef = wilddog.sync().ref("/user/" + studentID);
         userRef.once('value',function(snapshot){
-            var bestStudent = snapshot.val()[studentID];
-            $('.name-student').html(bestStudent.displayName?bestStudent.displayName:bestStudent.email);
-            $('.introduction-student').html(bestStudent.introduction);
+            var bestStudent = snapshot.val();
+            $('.name-student').html(bestStudent.stuName);
+            $('.introduction-student').html(bestStudent.stuIntroduction);
         });
         //查找对应的项目
         findNum(studentID,'student');
@@ -38,10 +39,11 @@ $(function(){
     teacherRef.once('value',function(snapshot){
         var teacherID = snapshot.val();
         //通过ID查找对应的用户
+        userRef = wilddog.sync().ref("/user/" + teacherID);
         userRef.once('value',function(snapshot){
-            var bestTeacher = snapshot.val()[teacherID];
-            $('.name-teacher').html(bestTeacher.displayName?bestTeacher.displayName:bestTeacher.email);
-            $('.introduction-teacher').html(bestTeacher.introduction);
+            var bestTeacher = snapshot.val();
+            $('.name-teacher').html(bestTeacher.teachName);
+            $('.introduction-teacher').html(bestTeacher.teachIntroduction);
         });
         //查找对应的项目
         findNum(teacherID,'teacher');

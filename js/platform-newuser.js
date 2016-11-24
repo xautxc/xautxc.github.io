@@ -23,11 +23,12 @@ $(function(){
                     displayName : info.teachName
                 });
                 
+                info.uid = user.uid;
                 info.identity = 'teacher';
-                info.email = user.email;
-                info.pending = '1';
+                info.teachEmail = user.email;
+                info.state = '1';
                 //将信息存入待审核区
-                var ref = wilddog.sync().ref("/pending");
+                var ref = wilddog.sync().ref("/user");
                 ref.child(user.uid).set(info, function(error) {
                     if (error === null){
                         // 数据同步到野狗云端成功完成
@@ -42,21 +43,22 @@ $(function(){
             
             //学生信息提交按钮
             $('#stu-btn').click(function(){
-                var info = getInfo(['stuName','stuNum','stuClass','stuPhone','stuSkill','stuIntroduction']);
+                var info = getInfo(['stuName','stuNum','stuColleage','stuMajor','stuClass','stuPhone','stuSkill','stuIntroduction']);
                 //更新user属性
                 wilddog.auth().currentUser.updateProfile({
-                    displayName : info.teachName
+                    displayName : info.stuName
                 });
                 
+                info.uid = user.uid;
                 info.identity = 'student';
-                info.email = user.email;
+                info.stuEmail = user.email;
                 //pending状态标志
                 // 1 : 审核中
                 // 2 : 审核通过
                 // 4 : 审核未通过
-                info.pending = '1';
+                info.state = '1';
                 //将信息存入待审核区
-                var ref = wilddog.sync().ref("/pending");
+                var ref = wilddog.sync().ref("/user");
                 ref.child(user.uid).set(info, function(error) {
                     if (error === null){
                         // 数据同步到野狗云端成功完成

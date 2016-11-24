@@ -8,22 +8,23 @@
     border: 1px solid #ddd;
     box-shadow: 2px 2px 12px rgba(0,0,0,.1);
     margin-top: 100px;
-    padding: 20px;
+    padding: 0 20px 20px;
 }
 
 .user-info button {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .user-info .introduction p{
     padding-left: 4em;
 }
 .user-show {
-    /*display: none;*/
+    display: none;
 }
 .user-show li {
     margin: 10px 10px 0; 
 }
+
 .user-show .introduction p {
     margin-top: 10px;
     text-indent: 2em;
@@ -74,7 +75,7 @@
    padding: 0 20px 10px;
 }
 
-.user-works .title {
+.user-works .title,.user-info .title {
     color: #888;
 }
 

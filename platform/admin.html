@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>学创平台 | 管理后台</title>
+    <script src = "https://cdn.wilddog.com/sdk/js/2.1.0/wilddog.js"></script>
+    <script type="text/javascript" src="/js/wilddogInit.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/platform-admin.css">
+    <script type="text/javascript" src="/script/lib/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/script/lib/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <h1>学创平台管理后台</h1>
+    <section class="admin-info col-md-offset-2 col-md-6">
+        <div>
+            <h3>待审核用户<span id="pendingNum"></span></h3>
+            <ul class="user-info" id="stuInfo">
+                <li class="col-md-5">姓名：<span id="stuName"></span></li>
+                <li class="col-md-6">身份：<span>学生</span></li>
+                <li class="col-md-5">学号：<span id="stuNum"></span></li>
+                <li class="col-md-6">学院：<span id="stuColleage"></span></li>
+                <li class="col-md-5">专业：<span id="stuMajor"></span></li>
+                <li class="col-md-6">班级：<span id="stuClass"></span></li>
+                <li class="col-md-12">邮箱：<span id="stuEmail"></span></li>
+                <li class="col-md-12">技能特长：<span id="stuSkill"></span></li>
+                <li class="col-md-12">个人简介：<span id="stuIntroduction"></span></li>
+                <li class="col-md-12">
+                    <button class="btn btn-success btn-pending btn-pass">通过</button>
+                    <button class="btn btn-danger btn-pending btn-notpass">不合格</button>
+                </li>
+            </ul>
+            <ul class="user-info" id="teachInfo">
+                <li class="col-md-5">姓名：<span id="teachName"></span></li>
+                <li class="col-md-6">身份：<span>教师</span></li>
+                <li class="col-md-5">工号：<span id="teachNum"></span></li>
+                <li class="col-md-6">院系：<span id="teachClass"></span></li>
+                <li class="col-md-12">邮箱：<span id="teachEmail"></span></li>
+                <li class="col-md-12">教师个人主页：<span id="teachIndex"></span></li>
+                <li class="col-md-12">研究方向：<span id="teachSkill"></span></li>
+                <li class="col-md-12">个人简介：<span id="teachIntroduction"></span></li>
+                <li class="col-md-12">
+                    <button class="btn btn-success btn-pending btn-pass">通过</button>
+                    <button class="btn btn-danger btn-pending btn-notpass">不合格</button>
+                </li>
+            </ul>
+        </div>
+        
+    </section>
+    
+    <section class="user-control col-md-offset-1 col-md-2">
+        <ul class="control-btns">
+            <li><button id="pendingInfo" class="btn btn-default center-block">审核信息</button></li>
+            <li><button id="userExport" class="btn btn-default center-block">用户导出</button></li>
+            <li><button id="workExport" class="btn btn-default center-block">项目导出</button></li>
+            <li><button id="signOut" class="btn btn-default center-block">退出系统</button></li>
+        </ul>
+    </section>
+    
+    <script type="text/javascript" src="/js/platform-admin.js"></script>
+</body>
+</html>

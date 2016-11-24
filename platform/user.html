@@ -19,7 +19,7 @@
         <nav>
             <a href="index.html">首页</a>
             <a href="square.html">项目广场</a>
-            <a href="#">创意集市</a>
+            <a href="#">菁英酒馆</a>
             <a href="user.html" class="active">个人中心</a>
         </nav>
         <div class="nav-user">
@@ -31,42 +31,32 @@
         </div>
     </header>
     <!-- 用户信息 -->
-    <section class="user-info col-md-offset-2 col-md-5">
-        <ul class="user-show">
-            <li class="displayName">
-                <i class="iconfont">&#xe601;</i>
-                <span>姓名：</span>
-                <span></span>
-            </li>
-            <li class="identity">
-                <i class="iconfont">&#xe608;</i>
-                <span>身份：</span>
-                <span></span>
-            </li>
-            <li class="direction">
-                <i class="iconfont">&#xe607;</i>
-                <span>方向：</span>
-                <span></span>
-            </li>
-            <li class="college">
-                <i class="iconfont">&#xe605;</i>
-                <span>院系： </span>
-                <span></span>
-            </li>
-            <li class="qq">
-                <i class="iconfont">&#xe603;</i>
-                <span>QQ ： </span>
-                <span></span>
-            </li>
-            <li class="introduction">
-                <i class="iconfont">&#xe604;</i>
-                <span>简介</span>
-                <p></p>
-            </li>
-            <button class="btn btn-default center-block">编辑信息</button>
+    <section class="user-info col-md-offset-2 col-md-6">
+        <h4 class="title">个人信息</h4>
+        <ul class="user-show" id="stuInfo">
+            <li class="col-md-5">姓名：<span id="stuName"></span></li>
+            <li class="col-md-6">身份：<span>学生</span></li>
+            <li class="col-md-5">学号：<span id="stuNum"></span></li>
+            <li class="col-md-6">学院：<span id="stuColleage"></span></li>
+            <li class="col-md-5">专业：<span id="stuMajor"></span></li>
+            <li class="col-md-6">班级：<span id="stuClass"></span></li>
+            <li class="col-md-12">邮箱：<span id="stuEmail"></span></li>
+            <li class="col-md-12">技能特长：<span id="stuSkill"></span></li>
+            <li class="col-md-12">个人简介：<span id="stuIntroduction"></span></li>
         </ul>
+        <ul class="user-show" id="teachInfo">
+            <li class="col-md-5">姓名：<span id="teachName">czxcz</span></li>
+            <li class="col-md-6">身份：<span>教师</span></li>
+            <li class="col-md-5">工号：<span id="teachNum">czxc</span></li>
+            <li class="col-md-6">院系：<span id="teachClass">zxcz</span></li>
+            <li class="col-md-12">邮箱：<span id="teachEmail">czxczxcz</span></li>
+            <li class="col-md-12">教师个人主页：<span id="teachIndex">czxczcx</span></li>
+            <li class="col-md-12">研究方向：<span id="teachSkill">zxczxc</span></li>
+            <li class="col-md-12">个人简介：<span id="teachIntroduction">zxczxxcz</span></li>
+        </ul>
+        
 
-        <form class="form-horizontal user-edit" role="form">
+        <!-- <form class="form-horizontal user-edit" role="form">
             <div class="form-group">
                 <label for="displayName" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">姓名</label>
                 <div class="col-sm-8 col-xs-8">
@@ -114,17 +104,17 @@
                 </div>
             </div>
             <button class="btn btn-default center-block">保存信息</button>
-        </form>
+        </form> -->
     </section>
     <!-- 控制挂件 -->
-    <section class="user-control col-md-offset-1 col-md-3">
+    <section class="user-control col-md-offset-1 col-md-2">
         <ul class="control-btns">
-            <li><button class="btn btn-default center-block addWord"  data-toggle="modal" data-target="#workModal"><i class="iconfont">&#xe602;</i> 发表项目</button></li>
-            <li><button class="btn btn-default center-block addIdea"><i class="iconfont">&#xe602;</i> 发表创意</button></li>
+            <li><button class="btn btn-default center-block addWork"  data-toggle="modal" data-target="#workModal"><i class="iconfont">&#xe602;</i> 发表项目</button></li>
+            <li><button class="btn btn-default center-block"><i class="iconfont">&#xe602;</i> 个人简历</button></li>
         </ul>
     </section>
     <!-- 用户项目 -->
-    <section class="user-works col-md-offset-2 col-md-5"></section>    
+    <section class="user-works col-md-offset-2 col-md-6"></section>    
     <!-- 发表项目摸态框 -->
     <div class="modal fade" id="workModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">

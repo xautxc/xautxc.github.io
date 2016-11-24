@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html,body {
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
+    font-family: Microsoft Yahei;
+    color: #555;
+}
+a,a:hover,a:visited,a:active,a:link {
+    text-decoration: none;
+}
+li {
+    list-style: none;
+}    
+textarea {
+    resize: none;
+}
+
+h1 {
+    text-align: center;
+}
+
+/*
+    admin-info  Start
+ */
+.admin-info {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 12px rgba(0,0,0,.1);
+    margin-top: 60px;
+    padding: 20px;
+}
+.admin-info .user-info{
+    border: 1px solid #ddd;
+    overflow: hidden;
+    padding-bottom: 20px;
+    display: none;
+}
+.admin-info li {
+    margin: 10px 10px 0; 
+    padding-right: 20px;
+}
+
+.admin-info li button{
+    margin-right: 20px;
+}
+
+/*
+    admin-info  End
+ */
+
+
+ /*
+     user-control  Start
+  */
+.user-control {
+    border-radius: 4px;
+    box-shadow: 0 1px 0 #f2f4f5;
+    margin-top: 60px;
+    padding: 0 20px 10px;
+}
+ 
+.control-btns li {
+    padding: 10px;
+}
+/*
+  user-control  End
+*/
