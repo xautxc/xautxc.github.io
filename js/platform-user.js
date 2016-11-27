@@ -114,15 +114,23 @@ $(function(){
         var joininRef = wilddog.sync().ref("/user/" + userID + "/joinin"),
             workRef = wilddog.sync().ref("/works");
         joininRef.once('value',function(snapshot){
+            if(snapshot.val() === null){
+                return;
+            }
             var joinWorks = snapshot.val(),
-                worksID = Object.values(joinWorks);
+                worksID = Object.keys(joinWorks);
             for(var workid of worksID){
-                workRef.child(workid).once('value',function(snapshot){
-                    var userWorksHtml = $(".user-works").html();
-                    var html = buildWorksNode(snapshot.val(),snapshot.key());
-                    
-                    userWorksHtml += html;
-                    $(".user-works").html(userWorksHtml);
+                workRef.child(joinWorks[workid]).once('value',function(snapshot){
+                    if(snapshot.val() !== null){
+                        var userWorksHtml = $(".user-works").html();
+                        var html = buildWorksNode(snapshot.val(),snapshot.key());
+                        
+                        userWorksHtml += html;
+                        $(".user-works").html(userWorksHtml);
+                    }else{
+                        //如果未查到该项目信息，删除joinin信息
+                        joininRef.child(workid).remove();
+                    }
                 });
             }
         });

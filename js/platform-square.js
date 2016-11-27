@@ -51,19 +51,10 @@ $(function(){
         });
     });
     
-    //热门项目
-    //
-    //
-    //
-    //热门项目居中显示 调整行高 点击跳转
-    //
-    //
-    //
-    //
+
     var workRef = wilddog.sync().ref("/works");
     workRef.orderByChild("praise").limitToLast(5).on("child_added", function(snapshot) {
         var html = buildHotWork(snapshot.val(),snapshot.key());
-        console.log(html);
         $('.work-list').append(html);
         
         /*查看项目详细信息*/
