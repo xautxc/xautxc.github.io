@@ -7,11 +7,11 @@
     wilddog.initializeApp(config);
     
     //登录检测         
-    wilddog.auth().onAuthStateChanged(function(user) {
-        if (user && user.emailVerified) {
-            location.href = "index.html";
-        }
-    });
+    // wilddog.auth().onAuthStateChanged(function(user) {
+    //     if (user && user.emailVerified) {
+    //         location.href = "index.html";
+    //     }
+    // });
     
     //保存当前状态
     var state = 'signin';
