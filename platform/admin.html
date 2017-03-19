@@ -11,11 +11,15 @@
     <link rel="stylesheet" href="/css/platform-admin.css">
     <script type="text/javascript" src="/script/lib/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="/script/lib/bootstrap.min.js"></script>
-
+    <style type="text/css"> 
+        @media print {
+            .noprint{ display:none;}
+        }
+    </style> 
 </head>
 <body>
-    <h1>学创平台管理后台</h1>
-    <section class="admin-info col-md-offset-2 col-md-6">
+    <h1 class="noprint">学创平台管理后台</h1>
+    <section class="admin-info col-md-offset-2 col-md-6 noprint">
         <div>
             <h3>待审核用户<span id="pendingNum"></span></h3>
             <ul class="user-info" id="stuInfo">
@@ -51,13 +55,22 @@
         
     </section>
     
-    <section class="user-control col-md-offset-1 col-md-2">
+    <section class="user-control col-md-offset-1 col-md-2 noprint">
         <ul class="control-btns">
             <li><button id="pendingInfo" class="btn btn-default center-block">审核信息</button></li>
             <li><button id="userExport" class="btn btn-default center-block">用户导出</button></li>
             <li><button id="workExport" class="btn btn-default center-block">项目导出</button></li>
             <li><button id="signOut" class="btn btn-default center-block">退出系统</button></li>
         </ul>
+    </section>
+    
+    <section class="printArea col-md-offset-1 col-md-10">
+        <h3 id="stuTable">学生信息</h3>
+        <table class="table table-bordered" id="userTableStudent"></table>
+        <h3 id="teachTable">教师信息</h3>
+        <table class="table table-bordered" id="userTableTeacher"></table>
+        <h3 id="worksTable">项目信息</h3>
+        <table class="table table-bordered" id="workTable"></table>
     </section>
     
     <script type="text/javascript" src="/js/platform-admin.js"></script>

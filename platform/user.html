@@ -45,72 +45,22 @@
             <li class="col-md-12">个人简介：<span id="stuIntroduction"></span></li>
         </ul>
         <ul class="user-show" id="teachInfo">
-            <li class="col-md-5">姓名：<span id="teachName">czxcz</span></li>
+            <li class="col-md-5">姓名：<span id="teachName"></span></li>
             <li class="col-md-6">身份：<span>教师</span></li>
-            <li class="col-md-5">工号：<span id="teachNum">czxc</span></li>
-            <li class="col-md-6">院系：<span id="teachClass">zxcz</span></li>
-            <li class="col-md-12">邮箱：<span id="teachEmail">czxczxcz</span></li>
-            <li class="col-md-12">教师个人主页：<span id="teachIndex">czxczcx</span></li>
-            <li class="col-md-12">研究方向：<span id="teachSkill">zxczxc</span></li>
-            <li class="col-md-12">个人简介：<span id="teachIntroduction">zxczxxcz</span></li>
+            <li class="col-md-5">工号：<span id="teachNum"></span></li>
+            <li class="col-md-6">院系：<span id="teachClass"></span></li>
+            <li class="col-md-12">邮箱：<span id="teachEmail"></span></li>
+            <li class="col-md-12">教师个人主页：<span id="teachIndex"></span></li>
+            <li class="col-md-12">研究方向：<span id="teachSkill"></span></li>
+            <li class="col-md-12">个人简介：<span id="teachIntroduction"></span></li>
         </ul>
-        
-
-        <!-- <form class="form-horizontal user-edit" role="form">
-            <div class="form-group">
-                <label for="displayName" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">姓名</label>
-                <div class="col-sm-8 col-xs-8">
-                  <input type="text" class="form-control" id="displayName">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="identity" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">职位</label>
-                <div class="col-sm-4 col-xs-4">
-                    <label>
-                        <input type="radio" name="identityRadios" id="optionsRadios1" value="student"> 同学
-                    </label>
-                </div>
-                <div class="col-sm-4 col-xs-4">
-                    <label>
-                        <input type="radio" name="identityRadios" id="optionsRadios2" value="teacher"> 教师
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="direction" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">研究方向</label>
-                <div class="col-sm-8 col-xs-8">
-                    <input type="text" class="form-control" id="direction">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="college1" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">学院/系</label>
-                <div class="col-sm-4 col-xs-4">
-                    <input type="text" class="form-control" id="college">
-                </div>
-                <div class="col-sm-4 col-xs-4">
-                    <input type="text" class="form-control" id="major">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="qq" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">QQ</label>
-                <div class="col-sm-8 col-xs-8">
-                    <input type="text" class="form-control" id="qq">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="introduction" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">简介</label>
-                <div class="col-sm-8 col-xs-8">
-                    <textarea class="form-control" rows="3" id="introduction"></textarea>
-                </div>
-            </div>
-            <button class="btn btn-default center-block">保存信息</button>
-        </form> -->
     </section>
     <!-- 控制挂件 -->
     <section class="user-control col-md-offset-1 col-md-2">
         <ul class="control-btns">
             <li><button class="btn btn-default center-block addWork"  data-toggle="modal" data-target="#workModal"><i class="iconfont">&#xe602;</i> 发表项目</button></li>
-            <li><button class="btn btn-default center-block"><i class="iconfont">&#xe602;</i> 个人简历</button></li>
+            <li><button class="btn btn-default center-block"  data-toggle="modal" data-target="#userModal"><i class="iconfont">&#xe602;</i> 修改信息</button></li>
+            <li><button class="btn btn-default center-block"  data-toggle="modal" data-target="#passwordModal"><i class="iconfont">&#xe602;</i> 修改密码</button></li>
         </ul>
     </section>
     <!-- 用户项目 -->
@@ -166,6 +116,93 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-primary" id="work-submit-btn">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- 修改用户信息摸态框 -->
+    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel-user">个人信息</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- 教师信息摸态框 -->
+                    <form class="form-horizontal user-edit" role="form" id="user-edit-teach">
+                        <div class="form-group">
+                            <label for="teachSkillModal" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">研究方向</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <textarea class="form-control" rows="3" id="teachSkillModal"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="teachIntroductionModal" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">个人简介</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <textarea class="form-control" rows="3" id="teachIntroductionModal"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- 学生信息摸态框 -->
+                    <form class="form-horizontal user-edit" role="form" id="user-edit-stu">
+                        <div class="form-group">
+                            <label for="stuSkillModal" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">技能特长</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <textarea class="form-control" rows="3" id="stuSkillModal"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="stuIntroductionModal" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">个人简介</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <textarea class="form-control" rows="3" id="stuIntroductionModal"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="user-submit-btn">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 修改密码摸态框 -->
+    <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel-pw">修改密码</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal user-edit" role="form">
+                        <div class="form-group">
+                            <label for="curPw" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">当前密码</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <input class="form-control" type="password" id="curPw">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPw1" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">新密码</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <input class="form-control" type="password" id="newPw1">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPw2" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">确认密码</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <input class="form-control" type="password" id="newPw2">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="pw-submit-btn">提交</button>
                 </div>
             </div>
         </div>

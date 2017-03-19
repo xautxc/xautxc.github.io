@@ -14,6 +14,14 @@ $(function(){
         }
     });
     
+    $('#stuTable').hide();
+    $('#teachTable').hide();
+    $('#worksTable').hide();
+    
+    $('#userTableStudent').hide();
+    $('#userTableTeacher').hide();
+    $('#worksTable').hide();
+    
     //审查信息按钮点击事件
     $('#pendingInfo').click(pending);
     
@@ -24,7 +32,17 @@ $(function(){
         });
     });
     
-        
+    //导出用户按钮点击事件
+    $('#userExport').click(printUser);
+    
+    //导出项目按钮点击事件
+    $('#workExport').click(printWork);
+    
+    
+    
+    
+    
+    //信息审核    
     function pending(){
         var userRef = wilddog.sync().ref("/user");
         //查找所有state='1'的用户
@@ -96,5 +114,82 @@ $(function(){
                 }
             }
         }
+    }
+    
+    
+    //打印用户信息
+    function printUser(){
+        var userRef = wilddog.sync().ref("/user");
+        
+        $('#userTableStudent').html("<thead><th class='col-md-2'>姓名</th><th class='col-md-2'>学号</th><th class='col-md-2'>班级</th><th class='col-md-2'>手机</th><th class='col-md-2'>邮箱</th></thead>");
+        $('#userTableTeacher').html("<thead><th class='col-md-2'>姓名</th><th class='col-md-2'>工号</th><th class='col-md-2'>院系</th><th class='col-md-2'>手机</th><th class='col-md-2'>邮箱</th></thead>");
+        
+        $('.btn').attr('disabled','disabled');
+        
+        $('#stuTable').show();
+        $('#teachTable').show();
+        $('#worksTable').hide();
+        $('#userTableStudent').show();
+        $('#userTableTeacher').show();
+        $('#worksTable').hide();
+        
+        alert('我郑重的告诉你，这个过程很慢。');
+        userRef.once('value',function(snapshot){
+            var users = snapshot.val(),
+                user = {},
+                htmlStu = '',
+                htmlTeach = '';
+            for(var item in users){
+                user = users[item];
+                if(user.identity == 'student'){
+                    if(user.stuEmail == 'admin@xautxc.com'){
+                        continue;
+                    }
+                    htmlStu += "<tr><td>"+user.stuName+"</td><td>"+user.stuNum+"</td><td>"+user.stuClass+"</td><td>"+user.stuPhone+"</td><td>"+user.stuEmail+"</td></tr>";
+                }else{
+                    htmlTeach += "<tr><td>"+user.teachName+"</td><td>"+user.teachNum+"</td><td>"+user.teachClass+"</td><td>"+user.teachPhone+"</td><td>"+user.teachEmail+"</td></tr>";
+                }
+            }
+            $('#userTableStudent').append(htmlStu);
+            $('#userTableTeacher').append(htmlTeach);
+            $('.btn').removeAttr("disabled");
+        });
+    }
+    
+    //打印项目信息
+    function printWork() {
+        var workRef = wilddog.sync().ref("/works");
+        
+        $('#workTable').html("<thead><th>项目名</th><th>创建者</th><th>创建日期</th><th>项目成员</th></thead>");
+        $('.btn').attr('disabled','disabled');
+        
+        $('#stuTable').hide();
+        $('#teachTable').hide();
+        $('#worksTable').show();
+        $('#userTableStudent').hide();
+        $('#userTableTeacher').hide();
+        $('#worksTable').show();
+        
+        alert('我郑重的告诉你，这个过程很慢。');
+        workRef.once('value',function(snapshot){
+            var works = snapshot.val(),
+                work = {},
+                members = {},
+                member = {},
+                html = "",
+                memberHtml = "";
+            for(var item in works){
+                memberHtml = "";
+                work = works[item];
+                members = work.members;
+                for(item in members){
+                    member = members[item];
+                    memberHtml += member.name + '&nbsp;&nbsp;&nbsp;';
+                }
+                html += "<tr><td>"+work.name+"</td><td>"+work.author+"</td><td>"+work.date+"</td><td>"+memberHtml+"</td></tr>";
+            }
+            $('#workTable').append(html);
+            $('.btn').removeAttr("disabled");
+        });
     }
 });

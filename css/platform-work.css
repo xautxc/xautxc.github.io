@@ -106,3 +106,15 @@
 .member-info {
     margin-top: 50px;
 }
+
+#memberModal .member-info {
+    margin-top: 10px;
+}
+
+#memberModal .modal-body table th,#memberModal .modal-body table td{
+    text-align: center;
+}
+
+#memberModal h4 {
+    font-weight: bolder;
+}

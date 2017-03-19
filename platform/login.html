@@ -37,9 +37,10 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-offset-1 col-sm-5 col-xs-5 col-xs-offset-1">
+                    <div class="col-sm-offset-1 col-sm-10 col-xs-10 col-xs-offset-1">
                         <div class="checkbox">
                             <label><input type="checkbox"> 记住账号 </label>
+                            <a href="#" class="col-sm-offset-5 col-xs-offset-5" data-toggle="modal" data-target="#findPwModal">找回密码</a>
                         </div>
                     </div>
                 </div>
@@ -80,7 +81,31 @@
             
         </div>
     </div>
-    
+    <!-- 找回密码摸态框 -->
+    <div class="modal fade" id="findPwModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel-findPw">找回密码</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal user-edit" role="form">
+                        <div class="form-group">
+                            <label for="findEmail" class="col-sm-2 col-sm-offset-1 col-xs-2 col-xs-offset-1 control-label">输入邮箱</label>
+                            <div class="col-sm-8 col-xs-8">
+                                <input class="form-control" type="text" id="findEmail">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="pw-find-btn">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript" src="/js/platform-login.js"></script>
 </body>
 </html>

@@ -10,11 +10,23 @@ $(function(){
             ref.once('value',function(snapshot){
                 var userInfo = snapshot.val()[userID];
                 showUserInfo(userInfo);
+                editUserModal(userInfo);
             });
             //显示作品信息
             showUserWork(workRef,userID);
             
             showUserJoinin(userID);
+            
+            //验证邮箱密码
+            //修改密码用
+            // wilddog.auth().currentUser
+            // .reauthenticate(wilddog.auth.EmailAuthProvider.credential('caozhihao@quyiyuan.com', '321321'))
+            // .then(function (user) {
+            //     console.info("link email.", user);
+            // })
+            // .catch(function (err) {
+            //     console.info(err.code);
+            // });
         }
     });
     
@@ -57,7 +69,9 @@ $(function(){
                         email : user.email,
                         job : '组长',
                         name : user.displayName,
-                        clazz : userObj.stuClass
+                        clazz : userObj.stuClass,
+                        uid : user.uid,
+                        state : 2
                     }
                 };
             }else{
@@ -66,7 +80,9 @@ $(function(){
                         email : user.email,
                         job : '指导教师',
                         name : user.displayName,
-                        clazz : userObj.teachClass
+                        clazz : userObj.teachClass,
+                        uid : user.uid,
+                        state : 2
                     }
                 };
             }
@@ -173,5 +189,76 @@ $(function(){
             $('#'+prop).text(userInfo[prop]);
         }
     }
-
+    
+    
+    //根据用户身份调整修改信息的模态框
+    function editUserModal(userInfo) {
+        if(userInfo.identity == 'teacher'){
+            $('#user-edit-stu').remove();
+            $('#teachIntroductionModal').text(userInfo.teachIntroduction);
+            $('#teachSkillModal').text(userInfo.teachSkill);
+        }else{
+            $('#user-edit-teach').remove();
+            $('#stuIntroductionModal').text(userInfo.stuIntroduction);
+            $('#stuSkillModal').text(userInfo.stuSkill);
+        }
+    }
+    
+    //修改信息提交按钮点击事件
+    $('#user-submit-btn').click(function(){
+        //获取当前的用户
+        var user = wilddog.auth().currentUser,
+            userID = user.uid;
+        wilddog.sync().ref("/user/" + userID).once('value',function(snapshot){
+            var userObj = snapshot.val();
+            var ref = wilddog.sync().ref("/user/" + userID);
+            var userModalInfo = {};
+            if($('#user-edit-stu').length > 0){
+                userModalInfo.stuSkill = $('#stuSkillModal').val();  
+                userModalInfo.stuIntroduction = $('#stuIntroductionModal').val();           
+            }else{
+                userModalInfo.teachSkill = $('#teachSkillModal').val();  
+                userModalInfo.teachIntroduction = $('#teachIntroductionModal').val();
+            }
+            ref.update(userModalInfo);
+            //隐藏模态框
+            $('#userModal').modal('hide');
+            location.reload();
+        });
+    });
+    
+    $('#pw-submit-btn').click(function(){
+        //获取输入内容
+        var curPw = $('#curPw').val(),
+            newPw1 = $('#newPw1').val(),
+            newPw2 = $('#newPw2').val();
+        
+        if(newPw1 !== newPw2){
+            alert('新密码前后输入不一致');
+            return;
+        }
+        
+        //获取当前的用户
+        var user = wilddog.auth().currentUser,
+            userID = user.uid;
+        if(user){
+            var email = user.email;
+            user.reauthenticate(wilddog.auth.EmailAuthProvider.credential(email, curPw))
+            .then(function (user) {
+                user.updatePassword(newPw1).then(function() {
+                    alert('修改密码成功,请重新登录!');
+                    wilddog.auth().signOut().then(function () {
+                        location.href = 'login.html';
+                    });
+                })
+                .catch(function(){
+                    alert('修改密码失败!');
+                });
+            })
+            .catch(function (err) {
+                console.info(err.code);
+                alert('当前密码错误，请重新输入。');
+            });
+        }
+    });
 });

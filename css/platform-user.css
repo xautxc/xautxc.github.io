@@ -32,7 +32,7 @@
 
 .user-edit {
     margin-top: 20px;
-    display: none;
+    /*display: none;*/
 }
 .form-horizontal textarea {
     resize: none;

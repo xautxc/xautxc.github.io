@@ -200,6 +200,22 @@
             });    
         }
     });
+    
+    //找回密码提交按钮点击事件
+    $('#pw-find-btn').click(function(){
+        var email = $('#findEmail').val();
+        
+        wilddog.auth().sendPasswordResetEmail(email)
+            .then(function(){
+                alert('请前往邮箱重置密码。');
+                //隐藏模态框
+                $('#findPwModal').modal('hide');
+            })
+            .catch(function(){
+                alert('邮箱格式错误或网络错误，请稍后再试。')
+            });
+    });
+    
         
     //邮箱格式检测函数
     function emailTest(email){

@@ -26,6 +26,10 @@ $(function(){
             commentInit(work,user,workRef);
             //摸态框初始化
             modalInit(work,workRef);
+            
+            
+            memberModalInit(memberRef,workRef,work);
+        
         });    
     }
     
@@ -79,9 +83,18 @@ $(function(){
                 var member = snapshot.val();
                 //如果查询到是项目成员
                 if(member !== null){
-                    $('#join-btn').html('退出项目');
+                    for(var item in member){
+                        var curMember = member[item];
+                    }
+                    if(curMember.state == 2){
+                        $('#join-btn').html('退出项目');
+                    }else{
+                        $('#join-btn').html('申请中...');
+                        $('#join-btn').attr({'disabled':'disabled'});
+                    }
+                    
                 }else{
-                    $('#join-btn').html('加入项目');
+                    $('#join-btn').html('申请加入');
                 }
             });
         
@@ -143,7 +156,9 @@ $(function(){
                             var memberInfo = {
                                 email : user.email,
                                 job : '组员',
-                                name : user.displayName
+                                name : user.displayName,
+                                uid : user.uid,
+                                state : 1
                             };
                             
                             if(userDetail.identity && userDetail.identity == 'teacher'){
@@ -184,6 +199,9 @@ $(function(){
             $('.member-info').html('<thead><th>姓名</th><th>班级</th><th>邮箱</th><th>职位</th></thead>');
             for(var item in members){
                 var member = members[item];
+                if(member.state == 1){
+                    continue;
+                }
                 var html = '<tr><td>'+ member.name +'</td><td>'+member.clazz+'</td><td>'+ member.email +'</td><td>'+ member.job +'</td></tr>';
                 $('.member-info').append(html);
             }
@@ -248,7 +266,7 @@ $(function(){
         }
     }
     
-    //摸态框初始化
+    //修改项目摸态框初始化
     function modalInit(work,workRef){
         //内容初始化
         $('#modal-work-name').val(work.name);
@@ -274,4 +292,167 @@ $(function(){
         });
     }
     
+    //成员摸态框
+    function memberModalInit(memberRef,workRef,work){
+        //获取成员相关信息
+        memberRef.once('value',function(snapshot){
+            var members = snapshot.val();
+            var joinMemberArr = [],
+                applyMemberArr = [];
+            var member;
+            
+            //成员筛选
+            for(var item in members){
+                member = members[item];
+                //申请入组的成员
+                if(member.state && member.state == 1){
+                    applyMemberArr.push(member);
+                }else if(member.state && member.state == 2){
+                //已加入的成员
+                    joinMemberArr.push(member);
+                }
+            }
+            
+            joinMember(joinMemberArr);
+            applyMember(applyMemberArr);
+            memberModalBtn(joinMemberArr,applyMemberArr,workRef,work);
+        });
+        
+        //加载项目组内成员
+        function joinMember(joinMemberArr){
+            $('.joinMember').html('<thead><th>姓名</th><th>班级</th><th>邮箱</th><th>职位</th><th>操作</th></thead>');
+            for(var i = 0; i < joinMemberArr.length; i++){
+                var member = joinMemberArr[i];
+                var html = '<tr><td>'+ member.name +'</td><td>'+member.clazz+'</td><td>'+ member.email +'</td><td>'+ member.job +'</td><td><button class="memberTick btn btn-danger btn-xs">踢出</button></td></tr>';
+                $('.joinMember').append(html);
+            }
+        }
+        
+        //加载申请中成员
+        function applyMember(applyMemberArr){
+            $('.applyMember').html('<thead><th>姓名</th><th>班级</th><th>邮箱</th><th>职位</th><th>操作</th></thead>');
+            for(var i = 0; i < applyMemberArr.length; i++){
+                var member = applyMemberArr[i];
+                var html = '<tr><td>'+ member.name +'</td><td>'+member.clazz+'</td><td>'+ member.email +'</td><td>'+ member.job +'</td><td><button class="memberAgree btn btn-success btn-xs">接受</button><button class="memberDeny btn btn-danger btn-xs">拒绝</button></td></tr>';
+                $('.applyMember').append(html);
+                
+            }
+        }
+        
+        //按钮事件绑定
+        function memberModalBtn(joinMemberArr,applyMemberArr,workRef,work){
+            //踢出按钮事件绑定
+            $(".joinMember").delegate("button","click",function(e){
+                if(!confirm('是否要从项目中移除该成员?')){
+                    return;
+                }
+                var targetEmail = e.target.parentNode.previousSibling.previousSibling.innerText;
+                // 根据邮箱查询要踢出的用户
+                workRef.child('members').orderByChild('email')
+                    .startAt(targetEmail)
+                    .endAt(targetEmail)
+                    .once('value',function(snapshot){
+                        var targetMember = snapshot.val();
+                        //单次循环取对象
+                        for(var item in targetMember){
+                            targetMember = targetMember[item];
+                        }
+                        //不能踢出项目创建者
+                        //joininID
+                        if(targetMember.name !== work.author){
+                            //根据joininID删除该用户信息下的joinin下的项目节点
+                            var joininID = targetMember.joininID;
+                            var joinRef = wilddog.sync().ref('/user/' + targetMember.uid +'/joinin/' + joininID);
+                            joinRef.remove();
+                            console.log(joininID);
+                            //删除项目members下的节点
+                            workRef.child('members').child(item.toString()).remove();
+                            //删除joinMemberArr中该成员
+                            for(var i = 0; i < joinMemberArr.length; i++){
+                                if(joinMemberArr[i].uid == targetMember.uid){
+                                    joinMemberArr.splice(i,1);
+                                    break;
+                                }
+                            }
+                            //刷新显示列表
+                            joinMember(joinMemberArr);
+                        }else{
+                            alert('不能踢出项目创建者！');
+                        }
+                    });  
+                
+            });
+            
+            //同意入组按钮点击事件
+            $(".applyMember").delegate(".memberAgree","click",function(e){
+                if(!confirm('是否同意其加入项目组?')){
+                    return;
+                }
+                var targetEmail = e.target.parentNode.previousSibling.previousSibling.innerText;
+                // 根据邮箱查询要同意的用户
+                workRef.child('members').orderByChild('email')
+                    .startAt(targetEmail)
+                    .endAt(targetEmail)
+                    .once('value',function(snapshot){
+                        var targetMember = snapshot.val();
+                        //单次循环取对象
+                        for(var item in targetMember){
+                            targetMember = targetMember[item];
+                        }
+                        //更新服务器上的用户数据
+                        workRef.child('members').child(item.toString()).update({'state':2});
+                        //刷新显示列表
+                        //删除applyMemberArr中该成员,转移至joinMem
+                        for(var i = 0; i < applyMemberArr.length; i++){
+                            if(applyMemberArr[i].uid == targetMember.uid){
+                                joinMemberArr.push(applyMemberArr[i]);
+                                applyMemberArr.splice(i,1);
+                                break;
+                            }
+                        }
+                        //刷新显示列表
+                        joinMember(joinMemberArr);
+                        applyMember(applyMemberArr);
+                    }); 
+            });
+            
+            //拒绝入组按钮点击事件
+            $(".applyMember").delegate(".memberDeny","click",function(e){
+                if(!confirm('是否拒绝其加入项目组?')){
+                    return;
+                }
+                var targetEmail = e.target.parentNode.previousSibling.previousSibling.innerText;
+                // 根据邮箱查询要踢出的用户
+                workRef.child('members').orderByChild('email')
+                    .startAt(targetEmail)
+                    .endAt(targetEmail)
+                    .once('value',function(snapshot){
+                        var targetMember = snapshot.val();
+                        //单次循环取对象
+                        for(var item in targetMember){
+                            targetMember = targetMember[item];
+                        }
+                    
+                        //根据joininID删除该用户信息下的joinin下的项目节点
+                        var joininID = targetMember.joininID;
+                        var joinRef = wilddog.sync().ref('/user/' + targetMember.uid +'/joinin/' + joininID);
+                        joinRef.remove();
+                        //删除项目members下的节点
+                        workRef.child('members').child(item.toString()).remove();
+                        //删除joinMemberArr中该成员
+                        for(var i = 0; i < applyMemberArr.length; i++){
+                            if(applyMemberArr[i].uid == targetMember.uid){
+                                applyMemberArr.splice(i,1);
+                                break;
+                            }
+                        }
+                        //刷新显示列表
+                        applyMember(applyMemberArr);
+                        
+                    });  
+            });
+            
+        }
+        
+    }
 });
